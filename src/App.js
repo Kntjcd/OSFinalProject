@@ -37,19 +37,24 @@ function App() {
 
   // Calculate FCFS
   const calculateFCFS = () => {
+    if (processes.length === 0) {
+      alert("Please add at least one process.");
+      return;
+    }
+
     let time = 0;
     let ganttData = [];
     let output = [];
 
     const sorted = [...processes].sort((a, b) => a.arrival - b.arrival);
 
-    sorted.forEach((p) => {
+    sorted.forEach((p, index) => {
       const start = Math.max(time, p.arrival);
       const finish = start + p.burst;
       const waiting = start - p.arrival;
       const turnaround = finish - p.arrival;
 
-      ganttData.push({ pid: p.pid, start, finish });
+      ganttData.push({ pid: p.pid, start, finish, id: index });
       output.push({
         pid: p.pid,
         arrival: p.arrival,
@@ -136,8 +141,8 @@ function App() {
 
           <tbody>
             {results.length > 0
-              ? results.map((r) => (
-                  <tr key={r.pid}>
+              ? results.map((r, index) => (
+                  <tr key={index}>
                     <td>{r.pid}</td>
                     <td>{r.arrival}</td>
                     <td>{r.burst}</td>
@@ -146,8 +151,8 @@ function App() {
                     <td>{r.finish}</td>
                   </tr>
                 ))
-              : processes.map((p) => (
-                  <tr key={p.pid}>
+              : processes.map((p, index) => (
+                  <tr key={index}>
                     <td>{p.pid}</td>
                     <td>{p.arrival}</td>
                     <td>{p.burst}</td>
@@ -163,7 +168,7 @@ function App() {
         <h3>Gantt Chart</h3>
         <div className="gantt">
           {gantt.map((g) => (
-            <div key={g.pid} className="gantt-block">
+            <div key={g.id} className="gantt-block">
               {g.pid} ({g.start} - {g.finish})
             </div>
           ))}
