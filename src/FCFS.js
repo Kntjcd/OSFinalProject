@@ -1,143 +1,102 @@
 import React, { useState } from "react";
 
-export default function FCFS() {
-  const [processName, setProcessName] = useState("");
-  const [arrivalTime, setArrivalTime] = useState("");
-  const [burstTime, setBurstTime] = useState("");
-  const [processes, setProcesses] = useState([]);
-  const [gantt, setGantt] = useState([]);
+function FCFS() {
+  const [processes, setProcesses] = useState([{ id: 1, arrival: "", burst: "" }]);
+  const [result, setResult] = useState(null);
 
-  const addProcess = () => {
-    if (!processName || arrivalTime === "" || burstTime === "") return;
-
-    const newProcess = {
-      name: processName,
-      arrival: parseInt(arrivalTime),
-      burst: parseInt(burstTime),
-    };
-
-    setProcesses([...processes, newProcess]);
-
-    setProcessName("");
-    setArrivalTime("");
-    setBurstTime("");
+  const handleChange = (index, field, value) => {
+    const updated = [...processes];
+    updated[index][field] = value;
+    setProcesses(updated);
   };
 
-  const clearTable = () => {
-    setProcesses([]);
-    setGantt([]);
+  const addProcess = () => {
+    setProcesses([
+      ...processes,
+      { id: processes.length + 1, arrival: "", burst: "" }
+    ]);
   };
 
   const calculateFCFS = () => {
-    if (processes.length === 0) return;
-
-    let sorted = [...processes].sort((a, b) => a.arrival - b.arrival);
+    const sorted = [...processes].sort((a, b) => a.arrival - b.arrival);
 
     let currentTime = 0;
-    let ganttData = [];
-    let computed = sorted.map((p) => {
-      let start = Math.max(currentTime, p.arrival);
-      let completion = start + p.burst;
-      let turnaround = completion - p.arrival;
-      let waiting = turnaround - p.burst;
+    let results = [];
 
-      ganttData.push({ name: p.name, start, finish: completion });
+    sorted.forEach((p) => {
+      const start = Math.max(currentTime, Number(p.arrival));
+      const finish = start + Number(p.burst);
 
-      currentTime = completion;
+      results.push({
+        id: p.id,
+        arrival: p.arrival,
+        burst: p.burst,
+        start,
+        finish,
+        waiting: start - p.arrival,
+        turnaround: finish - p.arrival
+      });
 
-      return {
-        ...p,
-        completion,
-        turnaround,
-        waiting,
-      };
+      currentTime = finish;
     });
 
-    setProcesses(computed);
-    setGantt(ganttData);
+    setResult(results);
   };
 
   return (
-    <div style={{ padding: "20px", maxWidth: "800px", margin: "auto" }}>
-      <h2>First Come First Serve (FCFS) Scheduling</h2>
+    <div>
+      <h1>FCFS Scheduling</h1>
 
-      <div style={{ marginBottom: "20px" }}>
-        <input
-          type="text"
-          placeholder="Process Name (e.g., P1)"
-          value={processName}
-          onChange={(e) => setProcessName(e.target.value)}
-          style={{ marginRight: "10px" }}
-        />
-        <input
-          type="number"
-          placeholder="Arrival Time"
-          value={arrivalTime}
-          onChange={(e) => setArrivalTime(e.target.value)}
-          style={{ marginRight: "10px" }}
-        />
-        <input
-          type="number"
-          placeholder="Burst Time"
-          value={burstTime}
-          onChange={(e) => setBurstTime(e.target.value)}
-          style={{ marginRight: "10px" }}
-        />
-        <button onClick={addProcess}>Add Process</button>
-      </div>
+      {processes.map((p, index) => (
+        <div key={p.id}>
+          <input
+            type="number"
+            placeholder="Arrival Time"
+            value={p.arrival}
+            onChange={(e) => handleChange(index, "arrival", e.target.value)}
+          />
+          <input
+            type="number"
+            placeholder="Burst Time"
+            value={p.burst}
+            onChange={(e) => handleChange(index, "burst", e.target.value)}
+          />
+        </div>
+      ))}
 
-      <table border="1" width="100%" cellPadding="5">
-        <thead>
-          <tr>
-            <th>Process</th>
-            <th>Arrival Time</th>
-            <th>Burst Time</th>
-            <th>Completion</th>
-            <th>Turnaround</th>
-            <th>Waiting</th>
-          </tr>
-        </thead>
-        <tbody>
-          {processes.map((p, index) => (
-            <tr key={index}>
-              <td>{p.name}</td>
-              <td>{p.arrival}</td>
-              <td>{p.burst}</td>
-              <td>{p.completion ?? "-"}</td>
-              <td>{p.turnaround ?? "-"}</td>
-              <td>{p.waiting ?? "-"}</td>
+      <button onClick={addProcess}>Add Process</button>
+      <button onClick={calculateFCFS}>Calculate</button>
+
+      {result && (
+        <table border="1" style={{ marginTop: "20px" }}>
+          <thead>
+            <tr>
+              <th>Process</th>
+              <th>Arrival</th>
+              <th>Burst</th>
+              <th>Start</th>
+              <th>Finish</th>
+              <th>Waiting</th>
+              <th>Turnaround</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <div style={{ marginTop: "20px" }}>
-        <button onClick={calculateFCFS} style={{ marginRight: "10px" }}>
-          CALCULATE
-        </button>
-        <button onClick={clearTable}>CLEAR TABLE</button>
-      </div>
-
-      <h3 style={{ marginTop: "30px" }}>Gantt Chart</h3>
-      <div style={{ display: "flex", alignItems: "center" }}>
-        {gantt.map((g, i) => (
-          <div
-            key={i}
-            style={{
-              border: "1px solid black",
-              padding: "10px",
-              marginRight: "5px",
-              minWidth: `${g.finish - g.start}0px`,
-              textAlign: "center",
-            }}
-          >
-            {g.name}
-            <div style={{ fontSize: "12px" }}>
-              {g.start} - {g.finish}
-            </div>
-          </div>
-        ))}
-      </div>
+          </thead>
+          <tbody>
+            {result.map((r) => (
+              <tr key={r.id}>
+                <td>P{r.id}</td>
+                <td>{r.arrival}</td>
+                <td>{r.burst}</td>
+                <td>{r.start}</td>
+                <td>{r.finish}</td>
+                <td>{r.waiting}</td>
+                <td>{r.turnaround}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }
+
+export default FCFS;
