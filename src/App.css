@@ -1,14 +1,18 @@
+/* GLOBAL */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  background: #f5f5f5;
 }
 
+/* MAIN CONTAINER */
 .container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
+  flex-wrap: wrap; /* allows stacking on mobile */
 }
 
-/* LEFT PANEL */
+/* LEFT PROFILE PANEL */
 .profile {
   width: 30%;
   background: #1f1f1f;
@@ -21,32 +25,44 @@ body {
   width: 150px;
   height: 150px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
-/* RIGHT PANEL */
+/* RIGHT CONTENT PANEL */
 .resume {
   width: 70%;
   padding: 40px;
   overflow-y: auto;
+  background: white;
 }
 
+/* GANTT CHART */
 .gantt {
   display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
   margin: 10px 0;
 }
 
 .gantt-block {
   background: #4CAF50;
   color: white;
-  padding: 8px;
-  margin-right: 5px;
+  padding: 8px 12px;
   border-radius: 5px;
+  white-space: nowrap;
+}
+
+/* TABLE */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 15px;
+  min-width: 600px; /* prevents breaking on small screens */
 }
 
 th, td {
@@ -54,9 +70,29 @@ th, td {
   padding: 8px;
   text-align: center;
 }
+
 th {
   background: #333;
   color: white;
+}
+
+/* BUTTONS */
+button {
+  padding: 10px 15px;
+  border: none;
+  background: #1e88e5;
+  color: white;
+  margin: 5px 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button:active {
+  transform: scale(0.97);
 }
 
 /* MODAL BACKDROP */
@@ -76,7 +112,8 @@ th {
 /* MODAL BOX */
 .modal-box {
   background: white;
-  width: 70%;
+  width: 90%;
+  max-width: 700px;
   padding: 20px;
   border-radius: 10px;
   max-height: 90vh;
@@ -90,4 +127,61 @@ th {
   border: none;
   cursor: pointer;
   border-radius: 5px;
+}
+
+/* INPUT SECTION */
+.input-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.input-section input {
+  padding: 10px;
+  border: 1px solid #777;
+  border-radius: 5px;
+  flex: 1;
+  min-width: 140px;
+}
+
+/* GALLERY */
+.gallery {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  margin-top: 15px;
+}
+
+.gallery-item {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 900px) {
+  .profile {
+    width: 100%;
+  }
+
+  .resume {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pfp {
+    width: 120px;
+    height: 120px;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .input-section {
+    flex-direction: column;
+  }
 }
