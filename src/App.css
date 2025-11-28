@@ -58,3 +58,36 @@ th {
   background: #333;
   color: white;
 }
+
+/* MODAL BACKDROP */
+.modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* MODAL BOX */
+.modal-box {
+  background: white;
+  width: 70%;
+  padding: 20px;
+  border-radius: 10px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.close-btn {
+  background: red;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
