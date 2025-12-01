@@ -7,13 +7,11 @@ function App() {
   ========================= */
   const [theme, setTheme] = useState("dark");
 
-  // Load saved theme from localStorage
   useEffect(() => {
     const saved = localStorage.getItem("theme");
     if (saved) setTheme(saved);
   }, []);
 
-  // Apply theme + save to localStorage
   useEffect(() => {
     document.body.className = theme; 
     localStorage.setItem("theme", theme);
@@ -33,7 +31,6 @@ function App() {
   const [processes, setProcesses] = useState([]);
   const [results, setResults] = useState([]);
   const [gantt, setGantt] = useState([]);
-
   const [showFCFS, setShowFCFS] = useState(false);
 
   /* ========================
@@ -116,26 +113,64 @@ function App() {
         <div className="profile">
           <img src="profile.jpg" alt="Profile" className="pfp" />
           <h2>Kent Jeced Alcantara</h2>
-          <p>BSIT Student • Developer</p>
+          <p>BSIT 3B Student • Photojournalist • Graphic Artist</p>
+          <p>Cordova, Cebu City, Philippines</p>
+          <p>Email: alcantarakentjeced@gmail.com</p>
+          <p>
+            GitHub: <a href="https://github.com/Kntjcd" target="_blank">https://github.com/Kntjcd</a>
+          </p>
         </div>
 
         {/* RIGHT PANEL */}
         <div className="resume">
           <h1>My Résumé</h1>
-          <p>
-            <b>About Me:</b> Passionate IT student specializing in web development.
-          </p>
 
+          {/* ABOUT ME */}
+          <h2>About Me</h2>
+          <p>I love exploring, learning foreign languages, and designing or making pubmats.</p>
+
+          {/* SKILLS */}
           <h2>Skills</h2>
           <ul>
-            <li>JavaScript</li>
-            <li>React JS</li>
-            <li>PHP</li>
-            <li>MySQL</li>
+            <li>JavaScript / React JS</li>
+            <li>PHP & MySQL</li>
+            <li>HTML / CSS / Responsive Web Design</li>
+            <li>Graphic Design / Layout Design / Adobe Photoshop & Illustrator</li>
+            <li>Photojournalism & Visual Storytelling</li>
+            <li>Basic Git & Version Control</li>
+            <li>Problem Solving & Creativity</li>
           </ul>
 
-          <h2>CPU Scheduling Simulation</h2>
+          {/* PROJECTS */}
+          <h2>Projects</h2>
+          <ul>
+            <li>
+              <b>Project:</b> SSG and BANAG BANAG School Publication Pubmats<br />
+              <b>Tech Used:</b> Laptop<br />
+              <b>Role:</b> Layout Artist / Designer
+            </li>
+          </ul>
 
+          {/* EDUCATION */}
+          <h2>Education</h2>
+          <p><b>School:</b> Cordova Public College</p>
+          <p><b>Course:</b> BSIT</p>
+          <p><b>Year Level / Expected Graduation:</b> 3rd Year</p>
+
+          {/* EXPERIENCE */}
+          <h2>Experience</h2>
+          <p>I worked as a Website Designer under Libetario Digital Marketing Services.</p>
+
+          {/* ACHIEVEMENTS */}
+          <h2>Achievements</h2>
+          <p>I have been a consistent SSG Officer from my First Year College until now.</p>
+
+          {/* LANGUAGES */}
+          <h2>Languages</h2>
+          <p>Cebuano, Tagalog, Ilonggo, English</p>
+
+          {/* CPU Scheduling Simulation Button */}
+          <h2>CPU Scheduling Simulation</h2>
           <button onClick={() => setShowFCFS(true)}>
             First Come First Serve Scheduling Algorithm
           </button>
@@ -157,21 +192,18 @@ function App() {
                     value={processName}
                     onChange={(e) => setProcessName(e.target.value)}
                   />
-
                   <input
                     type="number"
                     placeholder="Arrival Time"
                     value={arrival}
                     onChange={(e) => setArrival(e.target.value)}
                   />
-
                   <input
                     type="number"
                     placeholder="Burst Time"
                     value={burst}
                     onChange={(e) => setBurst(e.target.value)}
                   />
-
                   <div className="button-group">
                     <button onClick={addProcess}>Add Process</button>
                     <button onClick={calculateFCFS}>Calculate</button>
@@ -196,7 +228,6 @@ function App() {
                       <th>Finish</th>
                     </tr>
                   </thead>
-
                   <tbody>
                     {results.length > 0
                       ? results.map((r, index) => (
@@ -237,7 +268,6 @@ function App() {
 
           {/* GALLERY */}
           <h2>My Layout Gallery</h2>
-
           <div className="gallery">
             {["layout1.jpg", "layout2.jpg", "layout3.jpg", "layout4.jpg"].map(
               (img, index) => (

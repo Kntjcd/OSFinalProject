@@ -27,7 +27,7 @@ body.dark {
   --gantt-bg: #1f6feb;
 }
 
-/* Apply theme background */
+/* GLOBAL STYLES */
 body {
   background: var(--bg);
   color: var(--text);
@@ -37,15 +37,15 @@ body {
   padding: 0;
 }
 
-/* ================================
-   PAGE LAYOUT
-===================================*/
+/* PAGE LAYOUT */
 .container {
   display: flex;
   gap: 40px;
   padding: 40px;
   max-width: 1400px;
   margin: auto;
+  flex-wrap: wrap;
+  justify-content: center; /* Center content */
   transition: 0.3s;
 }
 
@@ -56,11 +56,13 @@ body {
   border: 1px solid var(--border);
   box-shadow: 0 6px 14px rgba(0,0,0,0.08);
   transition: 0.3s;
+  min-width: 280px;
+  flex: 1;
+  max-width: 500px;
 }
 
 /* LEFT PANEL */
 .profile {
-  width: 290px;
   text-align: center;
 }
 
@@ -72,14 +74,7 @@ body {
   border: 4px solid var(--button-bg);
 }
 
-/* RIGHT PANEL */
-.resume {
-  flex: 1;
-}
-
-/* ================================
-   HEADINGS
-===================================*/
+/* HEADINGS */
 h1, h2, h3 {
   color: var(--text);
   margin-bottom: 10px;
@@ -89,9 +84,7 @@ p, li {
   color: var(--subtext);
 }
 
-/* ================================
-   BUTTONS & FORMS
-===================================*/
+/* BUTTONS & FORMS */
 button {
   background: var(--button-bg);
   color: var(--button-text);
@@ -119,16 +112,14 @@ input {
   transition: 0.3s;
 }
 
-/* Standard spacing for button groups */
+/* BUTTON GROUP */
 .button-group {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
 
-/* ================================
-   THEME TOGGLE BUTTON
-===================================*/
+/* THEME TOGGLE BUTTON */
 .theme-toggle {
   position: fixed;
   top: 20px;
@@ -147,9 +138,7 @@ input {
   transform: scale(1.1);
 }
 
-/* ================================
-   MODAL
-===================================*/
+/* MODAL */
 .modal-bg {
   position: fixed;
   top: 0;
@@ -184,9 +173,7 @@ input {
   float: right;
 }
 
-/* ================================
-   TABLE
-===================================*/
+/* TABLE */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -205,9 +192,7 @@ th {
   color: white;
 }
 
-/* ================================
-   GANTT CHART
-===================================*/
+/* GANTT CHART */
 .gantt {
   display: flex;
   gap: 10px;
@@ -224,9 +209,7 @@ th {
   font-weight: 600;
 }
 
-/* ================================
-   GALLERY
-===================================*/
+/* GALLERY */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -245,29 +228,21 @@ th {
   transform: scale(1.04);
 }
 
-/* ======== RESPONSIVE ======== */
+/* RESPONSIVE */
 @media (max-width: 900px) {
   .container {
     flex-direction: column;
-    height: auto;
-    align-items: center; /* Center the cards */
+    align-items: center; /* Center cards */
   }
 
-  .profile, 
-  .resume {
+  .profile, .resume {
     width: 90%;
-    max-width: 500px;        /* Same card width */
-    margin: 15px auto;       /* Center horizontally */
-    border-radius: 20px;     /* Make them look like actual cards */
-  }
-
-  .profile {
-    border-right: none;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    max-width: 500px;
+    margin: 15px auto; /* Center horizontally */
+    border-radius: 20px;
   }
 }
 
-/* Small mobile screens */
 @media (max-width: 600px) {
   .button-group {
     flex-direction: column;
@@ -276,6 +251,25 @@ th {
 
   .profile, .resume {
     width: 95%;
-    max-width: 420px;   /* Slightly smaller for small screens */
+    max-width: 420px;
+  }
+}
+@media (max-width: 400px) {
+  .pfp {
+    width: 120px;
+    height: 120px;
+  }
+
+  .theme-toggle {
+    padding: 8px 12px;
+    font-size: 18px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
   }
 }
