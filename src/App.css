@@ -245,15 +245,37 @@ th {
   transform: scale(1.04);
 }
 
-/* ================================
-   RESPONSIVE DESIGN
-===================================*/
+/* ======== RESPONSIVE ======== */
 @media (max-width: 900px) {
   .container {
     flex-direction: column;
+    height: auto;
+    align-items: center; /* Center the cards */
+  }
+
+  .profile, 
+  .resume {
+    width: 90%;
+    max-width: 500px;        /* Same card width */
+    margin: 15px auto;       /* Center horizontally */
+    border-radius: 20px;     /* Make them look like actual cards */
   }
 
   .profile {
-    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+}
+
+/* Small mobile screens */
+@media (max-width: 600px) {
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .profile, .resume {
+    width: 95%;
+    max-width: 420px;   /* Slightly smaller for small screens */
   }
 }
