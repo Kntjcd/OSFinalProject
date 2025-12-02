@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { FaGithub, FaMoon, FaSun } from "react-icons/fa";
+import { FaGithub, FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa";
 
 function App() {
-  /* ========================
-      THEME SYSTEM
-  ========================= */
   const [theme, setTheme] = useState("dark");
+  const [burgerOpen, setBurgerOpen] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
@@ -20,9 +18,7 @@ function App() {
 
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 
-  /* ========================
-      STATES
-  ========================= */
+  // FCFS Scheduler States
   const [processName, setProcessName] = useState("");
   const [arrival, setArrival] = useState("");
   const [burst, setBurst] = useState("");
@@ -31,9 +27,6 @@ function App() {
   const [gantt, setGantt] = useState([]);
   const [showFCFS, setShowFCFS] = useState(false);
 
-  /* ========================
-      ADD PROCESS
-  ========================= */
   const addProcess = () => {
     if (!processName || arrival === "" || burst === "") {
       alert("Fill up all fields.");
@@ -48,18 +41,12 @@ function App() {
     setBurst("");
   };
 
-  /* ========================
-      CLEAR TABLE
-  ========================= */
   const clearTable = () => {
     setProcesses([]);
     setResults([]);
     setGantt([]);
   };
 
-  /* ========================
-      FCFS CALCULATION
-  ========================= */
   const calculateFCFS = () => {
     if (processes.length === 0) {
       alert("Please add at least one process.");
@@ -94,10 +81,10 @@ function App() {
       {/* HEADER */}
       <header className="header">
         <div className="logo">KJA</div>
-        <nav className="nav">
-          <a href="#about">ABOUT ME</a>
-          <a href="#projects">PROJECTS</a>
-          <a href="#contact">CONTACT US</a>
+        <nav className={`nav ${burgerOpen ? "open" : ""}`}>
+          <a href="#about" onClick={() => setBurgerOpen(false)}>ABOUT ME</a>
+          <a href="#projects" onClick={() => setBurgerOpen(false)}>PROJECTS</a>
+          <a href="#contact" onClick={() => setBurgerOpen(false)}>CONTACT US</a>
           <a
             href="https://github.com/Kntjcd"
             target="_blank"
@@ -110,77 +97,50 @@ function App() {
             {theme === "dark" ? <FaSun /> : <FaMoon />}
           </button>
         </nav>
+        <div className="burger" onClick={() => setBurgerOpen(!burgerOpen)}>
+          {burgerOpen ? <FaTimes /> : <FaBars />}
+        </div>
       </header>
 
       {/* MAIN CONTENT */}
       <div className="container">
-        {/* LEFT PANEL - Profile */}
+        {/* LEFT PANEL */}
         <div className="profile">
           <img src="profile.jpg" alt="Profile" className="pfp" />
           <h2>Kent Jeced Alcantara</h2>
           <p>BSIT 3B Student • Photojournalist • Graphic Artist</p>
           <p>Cordova, Cebu City, Philippines</p>
           <p>Email: alcantarakentjeced@gmail.com</p>
+          <p>
+            GitHub: <a href="https://github.com/Kntjcd" target="_blank">https://github.com/Kntjcd</a>
+          </p>
         </div>
 
-        {/* RIGHT PANEL - Resume & Sections */}
+        {/* RIGHT PANEL */}
         <div className="resume">
           {/* ABOUT ME */}
           <section id="about">
             <h1>About Me</h1>
-            <p>
-              I love exploring, learning foreign languages, and designing or
-              making pubmats.
-            </p>
-            <p>
-              If you want to know more about me, click the download button:
-            </p>
-            <a href="Kent_Resume.pdf" download>
-              <button>Download Resume</button>
+            <p>I love exploring, learning foreign languages, and designing or making pubmats.</p>
+            <p>If you want to know more about me, click the download button below:</p>
+            <a href="/Kent_Alcantara_Resume.pdf" download>
+              <button>Download My Resume</button>
             </a>
           </section>
 
-          {/* CPU SCHEDULING */}
+          {/* FCFS CPU Scheduling */}
           <section>
-            <h2>FCFS CPU Scheduling Algorithm</h2>
+            <h2>CPU Scheduling Simulation</h2>
             <button onClick={() => setShowFCFS(true)}>
-              Open CPU Scheduler
+              First Come First Serve Scheduling Algorithm
             </button>
           </section>
 
-          {/* PROJECTS */}
-          <section id="projects">
-            <h2>Projects</h2>
-            <div className="projects-gallery">
-              {[...Array(10)].map((_, i) => (
-                <div className="project-item" key={i}>
-                  <img src={`layout${i + 1}.jpg`} alt={`Project ${i + 1}`} />
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* CONTACT FORM */}
-          <section id="contact">
-            <h2>Contact Me</h2>
-            <form className="contact-form">
-              <input type="text" placeholder="Name" required />
-              <input type="email" placeholder="Email" required />
-              <textarea placeholder="Message" rows="5" required />
-              <button type="submit">Send Message</button>
-            </form>
-          </section>
-
-          {/* FCFS Modal */}
           {showFCFS && (
             <div className="modal-bg">
               <div className="modal-box">
-                <button className="close-btn" onClick={() => setShowFCFS(false)}>
-                  Close
-                </button>
-
+                <button className="close-btn" onClick={() => setShowFCFS(false)}>Close</button>
                 <h2>First Come First Serve Scheduling Algorithm</h2>
-
                 <div className="input-section">
                   <input
                     type="text"
@@ -203,12 +163,7 @@ function App() {
                   <div className="button-group">
                     <button onClick={addProcess}>Add Process</button>
                     <button onClick={calculateFCFS}>Calculate</button>
-                    <button
-                      onClick={clearTable}
-                      style={{ background: "red", color: "white" }}
-                    >
-                      Clear Table
-                    </button>
+                    <button onClick={clearTable} style={{ background: "red", color: "white" }}>Clear Table</button>
                   </div>
                 </div>
 
@@ -226,25 +181,26 @@ function App() {
                   <tbody>
                     {results.length > 0
                       ? results.map((r, index) => (
-                          <tr key={index}>
-                            <td>{r.pid}</td>
-                            <td>{r.arrival}</td>
-                            <td>{r.burst}</td>
-                            <td>{r.waiting}</td>
-                            <td>{r.turnaround}</td>
-                            <td>{r.finish}</td>
-                          </tr>
-                        ))
+                        <tr key={index}>
+                          <td>{r.pid}</td>
+                          <td>{r.arrival}</td>
+                          <td>{r.burst}</td>
+                          <td>{r.waiting}</td>
+                          <td>{r.turnaround}</td>
+                          <td>{r.finish}</td>
+                        </tr>
+                      ))
                       : processes.map((p, index) => (
-                          <tr key={index}>
-                            <td>{p.pid}</td>
-                            <td>{p.arrival}</td>
-                            <td>{p.burst}</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                          </tr>
-                        ))}
+                        <tr key={index}>
+                          <td>{p.pid}</td>
+                          <td>{p.arrival}</td>
+                          <td>{p.burst}</td>
+                          <td>-</td>
+                          <td>-</td>
+                          <td>-</td>
+                        </tr>
+                      ))
+                    }
                   </tbody>
                 </table>
 
@@ -252,13 +208,41 @@ function App() {
                 <div className="gantt">
                   {gantt.map((g) => (
                     <div key={g.id} className="gantt-block">
-                      {g.pid} ({g.start}-{g.finish})
+                      {g.pid} ({g.start} - {g.finish})
                     </div>
                   ))}
                 </div>
               </div>
             </div>
           )}
+
+          {/* PROJECTS */}
+          <section id="projects">
+            <h1>Projects</h1>
+            <div className="gallery">
+              {Array.from({ length: 10 }, (_, i) => `layout${i + 1}.jpg`).map(
+                (img, index) => (
+                  <img
+                    key={index}
+                    src={img}
+                    alt={`Project ${index + 1}`}
+                    className="gallery-item"
+                  />
+                )
+              )}
+            </div>
+          </section>
+
+          {/* CONTACT */}
+          <section id="contact">
+            <h1>Contact Me</h1>
+            <form className="contact-form">
+              <input type="text" placeholder="Name" required />
+              <input type="email" placeholder="Email" required />
+              <textarea placeholder="Message" rows="5" required></textarea>
+              <button type="submit">Send Message</button>
+            </form>
+          </section>
         </div>
       </div>
     </div>
