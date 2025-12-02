@@ -27,6 +27,9 @@ body.dark {
   --gantt-bg: #1f6feb;
 }
 
+/* GOOGLE FONT FOR LOGO */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
 /* GLOBAL STYLES */
 body {
   background: var(--bg);
@@ -35,6 +38,40 @@ body {
   font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.logo {
+  font-family: 'Dancing Script', cursive;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--button-bg);
+  letter-spacing: 2px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: var(--text);
+  margin-left: 25px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.menu a:hover {
+  color: var(--button-bg);
 }
 
 /* PAGE LAYOUT */
@@ -54,8 +91,7 @@ body {
 .profile {
   text-align: center;
   position: sticky;
-  top: 20px;
-  /* Distance from top of viewport */
+  top: 120px;
   align-self: flex-start;
   padding: 30px;
   background: var(--card);
@@ -79,7 +115,6 @@ body {
 .resume {
   flex: 1;
   max-height: 90vh;
-  /* Scrollable if content exceeds this height */
   overflow-y: auto;
   padding: 30px;
   background: var(--card);
@@ -91,17 +126,8 @@ body {
 }
 
 /* HEADINGS */
-h1,
-h2,
-h3 {
-  color: var(--text);
-  margin-bottom: 10px;
-}
-
-p,
-li {
-  color: var(--subtext);
-}
+h1, h2, h3 { color: var(--text); margin-bottom: 10px; }
+p, li { color: var(--subtext); }
 
 /* BUTTONS & FORMS */
 button {
@@ -116,9 +142,7 @@ button {
   transition: 0.3s;
 }
 
-button:hover {
-  opacity: 0.85;
-}
+button:hover { opacity: 0.85; }
 
 input {
   width: 100%;
@@ -132,11 +156,7 @@ input {
 }
 
 /* BUTTON GROUP */
-.button-group {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
+.button-group { display: flex; gap: 10px; flex-wrap: wrap; }
 
 /* THEME TOGGLE BUTTON */
 .theme-toggle {
@@ -153,9 +173,7 @@ input {
   transition: 0.3s;
 }
 
-.theme-toggle:hover {
-  transform: scale(1.1);
-}
+.theme-toggle:hover { transform: scale(1.1); }
 
 /* MODAL */
 .modal-bg {
@@ -200,8 +218,7 @@ table {
   border: 1px solid var(--border);
 }
 
-th,
-td {
+th, td {
   border: 1px solid var(--border);
   padding: 10px;
   text-align: center;
@@ -213,13 +230,7 @@ th {
 }
 
 /* GANTT CHART */
-.gantt {
-  display: flex;
-  gap: 10px;
-  margin-top: 18px;
-  flex-wrap: wrap;
-}
-
+.gantt { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
 .gantt-block {
   background: var(--gantt-bg);
   color: white;
@@ -244,52 +255,25 @@ th {
   transition: 0.3s;
 }
 
-.gallery-item:hover {
-  transform: scale(1.04);
-}
+.gallery-item:hover { transform: scale(1.04); }
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-  }
+  .container { flex-direction: column; align-items: center; }
+  .profile, .resume { width: 90%; max-width: 500px; margin: 15px auto; border-radius: 20px; }
+  .resume { max-height: none; }
+}
 
-  .profile,
-  .resume {
-    width: 90%;
-    max-width: 500px;
-    margin: 15px auto;
-    border-radius: 20px;
-  }
-
-  .resume {
-    max-height: none;
-    /* Let it scroll naturally on small screens */
-  }
+@media (max-width: 768px) {
+  .header { flex-direction: column; gap: 10px; }
+  .menu a { margin-left: 0; margin-right: 15px; }
 }
 
 @media (max-width: 600px) {
-  .button-group {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .profile,
-  .resume {
-    width: 95%;
-    max-width: 420px;
-  }
+  .button-group { flex-direction: column; gap: 10px; }
+  .profile, .resume { width: 95%; max-width: 420px; }
 }
-
 
 /* HIDE SCROLLBAR but keep scroll functionality */
-.resume {
-  scrollbar-width: none;
-  /* Firefox */
-}
-
-.resume::-webkit-scrollbar {
-  /* Chrome, Edge, Safari */
-  display: none;
-}
+.resume { scrollbar-width: none; }
+.resume::-webkit-scrollbar { display: none; }

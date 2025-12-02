@@ -101,14 +101,22 @@ function App() {
 
   return (
     <div className={`app-wrapper ${theme}`}>
-
       {/* THEME TOGGLE BUTTON */}
       <button className="theme-toggle" onClick={toggleTheme}>
         {theme === "dark" ? "☀️" : "🌙"}
       </button>
 
-      <div className="container">
+      {/* HEADER */}
+      <header className="header">
+        <div className="logo">KJA</div>
+        <nav className="menu">
+          <a href="#about">ABOUT ME</a>
+          <a href="#projects">PROJECTS</a>
+          <a href="#contact">CONTACT US</a>
+        </nav>
+      </header>
 
+      <div className="container">
         {/* LEFT PANEL */}
         <div className="profile">
           <img src="profile.jpg" alt="Profile" className="pfp" />
@@ -123,9 +131,8 @@ function App() {
 
         {/* RIGHT PANEL */}
         <div className="resume">
-          <h1>My Résumé</h1>
-
           {/* ABOUT ME */}
+          <h1 id="about">My Résumé</h1>
           <h2>About Me</h2>
           <p>I love exploring, learning foreign languages, and designing or making pubmats.</p>
 
@@ -142,7 +149,7 @@ function App() {
           </ul>
 
           {/* PROJECTS */}
-          <h2>Projects</h2>
+          <h2 id="projects">Projects</h2>
           <ul>
             <li>
               <b>Project:</b> SSG and BANAG BANAG School Publication Pubmats<br />
@@ -280,6 +287,11 @@ function App() {
               )
             )}
           </div>
+
+          {/* CONTACT US */}
+          <h2 id="contact">Contact Me</h2>
+          <p>Email: alcantarakentjeced@gmail.com</p>
+          <p>GitHub: <a href="https://github.com/Kntjcd" target="_blank">https://github.com/Kntjcd</a></p>
         </div>
       </div>
     </div>
