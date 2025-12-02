@@ -243,15 +243,28 @@ function App() {
             </div>
           )}
 
-          {/* PROJECTS */}
-          <h2 id="projects">Projects</h2>
-          <ul>
-            <li>
-              <b>Project:</b> SSG and BANAG BANAG School Publication Pubmats<br />
-              <b>Tech Used:</b> Laptop<br />
-              <b>Role:</b> Layout Artist / Designer
-            </li>
-          </ul>
+{/* PROJECTS */}
+<h2 id="projects">Projects</h2>
+<p>Here are some of my layout and design projects:</p>
+<div className="projects-gallery">
+  {[
+    "layout1.jpg",
+    "layout2.jpg",
+    "layout3.jpg",
+    "layout4.jpg",
+    "layout5.jpg",
+    "layout6.jpg",
+    "layout7.jpg",
+    "layout8.jpg",
+    "layout9.jpg",
+    "layout10.jpg",
+  ].map((img, index) => (
+    <div key={index} className="project-item">
+      <img src={img} alt={`Project ${index + 1}`} />
+    </div>
+  ))}
+</div>
+
 
           {/* CONTACT ME */}
           <h2 id="contact">Contact Me</h2>
