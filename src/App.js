@@ -64,7 +64,7 @@ function App() {
           {/* Profile Card */}
           <div className="md:w-1/4 mb-6 md:mb-0 md:sticky md:top-20 bg-white dark:bg-gray-800 p-4 rounded shadow">
             <h2 className="text-xl font-bold mb-2">Kent Jeced Alcantara</h2>
-            <p>BSIT 3B Student • Photojournalist • Graphic Artist</p>
+            <p>Photojournalist • Graphic Artist</p>
           </div>
 
           {/* Main Content */}
