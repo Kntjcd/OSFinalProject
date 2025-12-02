@@ -112,16 +112,22 @@ function App() {
         {theme === "dark" ? "☀️" : "🌙"}
       </button>
 
-      {/* HEADER */}
-      <header className="header">
-        <div className="logo">KJA</div>
-        <nav className="menu">
-          <a href="#about">ABOUT ME</a>
-          <a href="#fcfs">FCFS CPU</a>
-          <a href="#projects">PROJECTS</a>
-          <a href="#contact">CONTACT ME</a>
-        </nav>
-      </header>
+{/* HEADER */}
+<header className="header">
+  <div className="logo">KJA</div>
+  
+  <nav className="menu">
+    <a href="#about">ABOUT ME</a>
+    <a href="#fcfs">FCFS CPU</a>
+    <a href="#projects">PROJECTS</a>
+    <a href="#contact">CONTACT ME</a>
+    <a href="https://github.com/Kntjcd" target="_blank" className="github-btn">GITHUB</a>
+    <button className="theme-toggle-header" onClick={toggleTheme}>
+      {theme === "dark" ? "☀️" : "🌙"}
+    </button>
+  </nav>
+</header>
+
 
       <div className="container">
         {/* LEFT PANEL */}

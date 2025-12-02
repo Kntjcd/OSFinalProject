@@ -335,3 +335,114 @@ th {
   transform: scale(1.05);
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
+
+/* HEADER */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--card);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+/* TECH THEMED LOGO */
+.logo {
+  font-family: 'Orbitron', sans-serif; /* Futuristic/Tech font */
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--button-bg);
+  letter-spacing: 2px;
+  transition: transform 0.3s, color 0.3s;
+  cursor: default;
+}
+
+.logo:hover {
+  transform: scale(1.1) rotate(-2deg);
+  color: var(--gantt-bg);
+}
+
+/* NAVIGATION MENU */
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 6px;
+  position: relative;
+  transition: 0.3s;
+}
+
+.menu a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--button-bg);
+  transition: 0.3s;
+}
+
+.menu a:hover::after {
+  width: 100%;
+}
+
+.menu a:hover {
+  color: var(--button-bg);
+  transform: scale(1.05);
+}
+
+/* GITHUB BUTTON */
+.github-btn {
+  background: var(--button-bg);
+  color: var(--button-text);
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.github-btn:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+/* HEADER THEME TOGGLE BUTTON */
+.theme-toggle-header {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.theme-toggle-header:hover {
+  transform: scale(1.1);
+}
+
+/* RESPONSIVE HEADER */
+@media (max-width: 900px) {
+  .header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .menu {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
