@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { FaGithub, FaBars, FaTimes } from "react-icons/fa";
 import "./App.css";
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    document.body.className = theme; 
+    document.body.className = theme;
     localStorage.setItem("theme", theme);
   }, [theme]);
 
@@ -22,7 +23,12 @@ function App() {
   };
 
   /* ========================
-      FCFS CPU SCHEDULING STATES
+      MOBILE MENU
+  ========================= */
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  /* ========================
+      STATES
   ========================= */
   const [processName, setProcessName] = useState("");
   const [arrival, setArrival] = useState("");
@@ -33,6 +39,9 @@ function App() {
   const [gantt, setGantt] = useState([]);
   const [showFCFS, setShowFCFS] = useState(false);
 
+  /* ========================
+      ADD PROCESS
+  ========================= */
   const addProcess = () => {
     if (!processName || arrival === "" || burst === "") {
       alert("Fill up all fields.");
@@ -49,12 +58,18 @@ function App() {
     setBurst("");
   };
 
+  /* ========================
+      CLEAR TABLE
+  ========================= */
   const clearTable = () => {
     setProcesses([]);
     setResults([]);
     setGantt([]);
   };
 
+  /* ========================
+      FCFS CALCULATION
+  ========================= */
   const calculateFCFS = () => {
     if (processes.length === 0) {
       alert("Please add at least one process.");
@@ -90,44 +105,29 @@ function App() {
     setGantt(ganttData);
   };
 
-  /* ========================
-      CONTACT FORM STATE
-  ========================= */
-  const [contactName, setContactName] = useState("");
-  const [contactEmail, setContactEmail] = useState("");
-  const [contactMessage, setContactMessage] = useState("");
-
-  const handleContactSubmit = (e) => {
-    e.preventDefault();
-    alert(`Thank you ${contactName}! Your message has been sent.`);
-    setContactName("");
-    setContactEmail("");
-    setContactMessage("");
-  };
-
   return (
     <div className={`app-wrapper ${theme}`}>
-      {/* THEME TOGGLE BUTTON */}
-      <button className="theme-toggle" onClick={toggleTheme}>
-        {theme === "dark" ? "☀️" : "🌙"}
-      </button>
+      {/* HEADER */}
+      <header className="header">
+        <div className="logo">KJA</div>
 
-{/* HEADER */}
-<header className="header">
-  <div className="logo">KJA</div>
-  
-  <nav className="menu">
-    <a href="#about">ABOUT ME</a>
-    <a href="#fcfs">FCFS CPU</a>
-    <a href="#projects">PROJECTS</a>
-    <a href="#contact">CONTACT ME</a>
-    <a href="https://github.com/Kntjcd" target="_blank" className="github-btn">GITHUB</a>
-    <button className="theme-toggle-header" onClick={toggleTheme}>
-      {theme === "dark" ? "☀️" : "🌙"}
-    </button>
-  </nav>
-</header>
+        <nav className={`menu ${mobileMenuOpen ? "open" : ""}`}>
+          <a href="#about" onClick={() => setMobileMenuOpen(false)}>ABOUT ME</a>
+          <a href="#fcfs" onClick={() => setMobileMenuOpen(false)}>FCFS CPU</a>
+          <a href="#projects" onClick={() => setMobileMenuOpen(false)}>PROJECTS</a>
+          <a href="#contact" onClick={() => setMobileMenuOpen(false)}>CONTACT ME</a>
+          <a href="https://github.com/Kntjcd" target="_blank" className="github-btn">
+            <FaGithub size={22} />
+          </a>
+          <button className="theme-toggle-header" onClick={toggleTheme}>
+            {theme === "dark" ? "☀️" : "🌙"}
+          </button>
+        </nav>
 
+        <div className="burger" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          {mobileMenuOpen ? <FaTimes size={25} /> : <FaBars size={25} />}
+        </div>
+      </header>
 
       <div className="container">
         {/* LEFT PANEL */}
@@ -145,30 +145,21 @@ function App() {
         {/* RIGHT PANEL */}
         <div className="resume">
           {/* ABOUT ME */}
-          <h1 id="about">About Me</h1>
-          <p>
-            I love exploring, learning foreign languages, and designing or making pubmats.
-          </p>
-          <p>
-            If you want to know more about me, click the download button below:
-          </p>
-          <a href="/resume.pdf" download>
-            <button>Download My Resume</button>
+          <h2 id="about">About Me</h2>
+          <p>I love exploring, learning foreign languages, and designing or making pubmats.</p>
+          <p>If you want to know more about me, click the download button:</p>
+          <a href="Kent_Resume.pdf" download>
+            <button>Download Resume</button>
           </a>
 
           {/* FCFS CPU SCHEDULING */}
           <h2 id="fcfs">FCFS CPU Scheduling Algorithm</h2>
-          <button onClick={() => setShowFCFS(true)}>
-            Open FCFS Scheduler
-          </button>
+          <button onClick={() => setShowFCFS(true)}>Open Simulation</button>
 
           {showFCFS && (
             <div className="modal-bg">
               <div className="modal-box">
-                <button className="close-btn" onClick={() => setShowFCFS(false)}>
-                  Close
-                </button>
-
+                <button className="close-btn" onClick={() => setShowFCFS(false)}>Close</button>
                 <h2>First Come First Serve Scheduling Algorithm</h2>
                 <div className="input-section">
                   <input
@@ -201,6 +192,7 @@ function App() {
                   </div>
                 </div>
 
+                {/* TABLE */}
                 <table>
                   <thead>
                     <tr>
@@ -237,6 +229,7 @@ function App() {
                   </tbody>
                 </table>
 
+                {/* GANTT */}
                 <h3>Gantt Chart</h3>
                 <div className="gantt">
                   {gantt.map((g) => (
@@ -249,53 +242,26 @@ function App() {
             </div>
           )}
 
-{/* PROJECTS */}
-<h2 id="projects">Projects</h2>
-<p>Here are some of my layout and design projects:</p>
-<div className="projects-gallery">
-  {[
-    "layout1.jpg",
-    "layout2.jpg",
-    "layout3.jpg",
-    "layout4.jpg",
-    "layout5.jpg",
-    "layout6.jpg",
-    "layout7.jpg",
-    "layout8.jpg",
-    "layout9.jpg",
-    "layout10.jpg",
-  ].map((img, index) => (
-    <div key={index} className="project-item">
-      <img src={img} alt={`Project ${index + 1}`} />
-    </div>
-  ))}
-</div>
-
+          {/* PROJECTS */}
+          <h2 id="projects">Projects</h2>
+          <p>Here are some of my layout and design projects:</p>
+          <div className="projects-gallery">
+            {[
+              "layout1.jpg","layout2.jpg","layout3.jpg","layout4.jpg","layout5.jpg",
+              "layout6.jpg","layout7.jpg","layout8.jpg","layout9.jpg","layout10.jpg"
+            ].map((img, index) => (
+              <div key={index} className="project-item">
+                <img src={img} alt={`Project ${index + 1}`} />
+              </div>
+            ))}
+          </div>
 
           {/* CONTACT ME */}
           <h2 id="contact">Contact Me</h2>
-          <form onSubmit={handleContactSubmit} className="contact-form">
-            <input
-              type="text"
-              placeholder="Name"
-              value={contactName}
-              onChange={(e) => setContactName(e.target.value)}
-              required
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              value={contactEmail}
-              onChange={(e) => setContactEmail(e.target.value)}
-              required
-            />
-            <textarea
-              placeholder="Message"
-              value={contactMessage}
-              onChange={(e) => setContactMessage(e.target.value)}
-              rows={5}
-              required
-            />
+          <form className="contact-form">
+            <input type="text" placeholder="Name" />
+            <input type="email" placeholder="Email" />
+            <textarea placeholder="Message" rows="5"></textarea>
             <button type="submit">Send Message</button>
           </form>
         </div>
