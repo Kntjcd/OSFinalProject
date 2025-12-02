@@ -219,3 +219,20 @@ input, textarea {
     display: block;
   }
 }
+
+
+@media (max-width: 900px) {
+  .profile {
+    position: static; /* Remove sticky on mobile */
+    top: auto;
+    width: 90%;
+    max-width: 500px;
+    margin: 15px auto;
+  }
+
+  .resume {
+    width: 90%;
+    max-width: 500px;
+    max-height: none; /* Let it scroll naturally */
+  }
+}
