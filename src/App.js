@@ -22,7 +22,7 @@ function App() {
   };
 
   /* ========================
-      STATES
+      FCFS CPU SCHEDULING STATES
   ========================= */
   const [processName, setProcessName] = useState("");
   const [arrival, setArrival] = useState("");
@@ -33,9 +33,6 @@ function App() {
   const [gantt, setGantt] = useState([]);
   const [showFCFS, setShowFCFS] = useState(false);
 
-  /* ========================
-      ADD PROCESS
-  ========================= */
   const addProcess = () => {
     if (!processName || arrival === "" || burst === "") {
       alert("Fill up all fields.");
@@ -52,18 +49,12 @@ function App() {
     setBurst("");
   };
 
-  /* ========================
-      CLEAR TABLE
-  ========================= */
   const clearTable = () => {
     setProcesses([]);
     setResults([]);
     setGantt([]);
   };
 
-  /* ========================
-      FCFS CALCULATION
-  ========================= */
   const calculateFCFS = () => {
     if (processes.length === 0) {
       alert("Please add at least one process.");
@@ -99,6 +90,21 @@ function App() {
     setGantt(ganttData);
   };
 
+  /* ========================
+      CONTACT FORM STATE
+  ========================= */
+  const [contactName, setContactName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactMessage, setContactMessage] = useState("");
+
+  const handleContactSubmit = (e) => {
+    e.preventDefault();
+    alert(`Thank you ${contactName}! Your message has been sent.`);
+    setContactName("");
+    setContactEmail("");
+    setContactMessage("");
+  };
+
   return (
     <div className={`app-wrapper ${theme}`}>
       {/* THEME TOGGLE BUTTON */}
@@ -111,8 +117,9 @@ function App() {
         <div className="logo">KJA</div>
         <nav className="menu">
           <a href="#about">ABOUT ME</a>
+          <a href="#fcfs">FCFS CPU</a>
           <a href="#projects">PROJECTS</a>
-          <a href="#contact">CONTACT US</a>
+          <a href="#contact">CONTACT ME</a>
         </nav>
       </header>
 
@@ -132,57 +139,23 @@ function App() {
         {/* RIGHT PANEL */}
         <div className="resume">
           {/* ABOUT ME */}
-          <h1 id="about">My Résumé</h1>
-          <h2>About Me</h2>
-          <p>I love exploring, learning foreign languages, and designing or making pubmats.</p>
+          <h1 id="about">About Me</h1>
+          <p>
+            I love exploring, learning foreign languages, and designing or making pubmats.
+          </p>
+          <p>
+            If you want to know more about me, click the download button below:
+          </p>
+          <a href="/resume.pdf" download>
+            <button>Download My Resume</button>
+          </a>
 
-          {/* SKILLS */}
-          <h2>Skills</h2>
-          <ul>
-            <li>JavaScript / React JS</li>
-            <li>PHP & MySQL</li>
-            <li>HTML / CSS / Responsive Web Design</li>
-            <li>Graphic Design / Layout Design / Adobe Photoshop & Illustrator</li>
-            <li>Photojournalism & Visual Storytelling</li>
-            <li>Basic Git & Version Control</li>
-            <li>Problem Solving & Creativity</li>
-          </ul>
-
-          {/* PROJECTS */}
-          <h2 id="projects">Projects</h2>
-          <ul>
-            <li>
-              <b>Project:</b> SSG and BANAG BANAG School Publication Pubmats<br />
-              <b>Tech Used:</b> Laptop<br />
-              <b>Role:</b> Layout Artist / Designer
-            </li>
-          </ul>
-
-          {/* EDUCATION */}
-          <h2>Education</h2>
-          <p><b>School:</b> Cordova Public College</p>
-          <p><b>Course:</b> BSIT</p>
-          <p><b>Year Level / Expected Graduation:</b> 3rd Year</p>
-
-          {/* EXPERIENCE */}
-          <h2>Experience</h2>
-          <p>I worked as a Website Designer under Libetario Digital Marketing Services.</p>
-
-          {/* ACHIEVEMENTS */}
-          <h2>Achievements</h2>
-          <p>I have been a consistent SSG Officer from my First Year College until now.</p>
-
-          {/* LANGUAGES */}
-          <h2>Languages</h2>
-          <p>Cebuano, Tagalog, Ilonggo, English</p>
-
-          {/* CPU Scheduling Simulation Button */}
-          <h2>CPU Scheduling Simulation</h2>
+          {/* FCFS CPU SCHEDULING */}
+          <h2 id="fcfs">FCFS CPU Scheduling Algorithm</h2>
           <button onClick={() => setShowFCFS(true)}>
-            First Come First Serve Scheduling Algorithm
+            Open FCFS Scheduler
           </button>
 
-          {/* FCFS MODAL */}
           {showFCFS && (
             <div className="modal-bg">
               <div className="modal-box">
@@ -191,7 +164,6 @@ function App() {
                 </button>
 
                 <h2>First Come First Serve Scheduling Algorithm</h2>
-
                 <div className="input-section">
                   <input
                     type="text"
@@ -223,7 +195,6 @@ function App() {
                   </div>
                 </div>
 
-                {/* TABLE */}
                 <table>
                   <thead>
                     <tr>
@@ -260,7 +231,6 @@ function App() {
                   </tbody>
                 </table>
 
-                {/* GANTT */}
                 <h3>Gantt Chart</h3>
                 <div className="gantt">
                   {gantt.map((g) => (
@@ -273,25 +243,42 @@ function App() {
             </div>
           )}
 
-          {/* GALLERY */}
-          <h2>My Layout Gallery</h2>
-          <div className="gallery">
-            {["layout1.jpg", "layout2.jpg", "layout3.jpg", "layout4.jpg"].map(
-              (img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  className="gallery-item"
-                  alt={`Project ${index + 1}`}
-                />
-              )
-            )}
-          </div>
+          {/* PROJECTS */}
+          <h2 id="projects">Projects</h2>
+          <ul>
+            <li>
+              <b>Project:</b> SSG and BANAG BANAG School Publication Pubmats<br />
+              <b>Tech Used:</b> Laptop<br />
+              <b>Role:</b> Layout Artist / Designer
+            </li>
+          </ul>
 
-          {/* CONTACT US */}
+          {/* CONTACT ME */}
           <h2 id="contact">Contact Me</h2>
-          <p>Email: alcantarakentjeced@gmail.com</p>
-          <p>GitHub: <a href="https://github.com/Kntjcd" target="_blank">https://github.com/Kntjcd</a></p>
+          <form onSubmit={handleContactSubmit} className="contact-form">
+            <input
+              type="text"
+              placeholder="Name"
+              value={contactName}
+              onChange={(e) => setContactName(e.target.value)}
+              required
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              value={contactEmail}
+              onChange={(e) => setContactEmail(e.target.value)}
+              required
+            />
+            <textarea
+              placeholder="Message"
+              value={contactMessage}
+              onChange={(e) => setContactMessage(e.target.value)}
+              rows={5}
+              required
+            />
+            <button type="submit">Send Message</button>
+          </form>
         </div>
       </div>
     </div>

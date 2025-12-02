@@ -277,3 +277,41 @@ th {
 /* HIDE SCROLLBAR but keep scroll functionality */
 .resume { scrollbar-width: none; }
 .resume::-webkit-scrollbar { display: none; }
+
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  color: var(--input-text);
+  transition: 0.3s;
+}
+
+.contact-form button {
+  width: fit-content;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact-form button:hover {
+  opacity: 0.85;
+}
+
+/* Resume Download Button */
+.resume a button {
+  margin-top: 10px;
+}
