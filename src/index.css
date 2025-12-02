@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Remove scrollbar for About Me */
+#about {
+  scrollbar-width: none; /* Firefox */
+}
+#about::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
