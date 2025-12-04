@@ -23,6 +23,49 @@ const projects = [
     title: "Project Three",
     description: "Description for project three",
   },
+
+  {
+    id: 4,
+    image: "./assets/project4.jpg",
+    title: "Project Three",
+    description: "Description for project three",
+  },
+  {
+    id: 5,
+    image: "./assets/project5.jpg",
+    title: "Project Three",
+    description: "Description for project three",
+  },
+  {
+    id: 6,
+    image: "./assets/project6.jpg",
+    title: "Project Three",
+    description: "Description for project three",
+  },
+  {
+    id: 7,
+    image: "./assets/project7.jpg",
+    title: "Project Three",
+    description: "Description for project three",
+  },
+  {
+    id: 8,
+    image: "./assets/project8.jpg",
+    title: "Project Three",
+    description: "Description for project three",
+  },
+  {
+    id: 9,
+    image: "./assets/project9.jpg",
+    title: "Project Three",
+    description: "Description for project three",
+  },
+  {
+    id: 10,
+    image: "./assets/project10.jpg",
+    title: "Project Three",
+    description: "Description for project three",
+  },
 ];
 
 function App() {
