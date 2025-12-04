@@ -236,3 +236,32 @@ input, textarea {
     max-height: none; /* Let it scroll naturally */
   }
 }
+
+/* --- subtle card hover for project items --- */
+.bg-gray-100:hover {
+  transform: translateY(-4px);
+  transition: transform 0.18s ease;
+}
+
+/* smoother button tap */
+button:active {
+  transform: scale(0.98);
+}
+
+/* gantt block rounding */
+.gantt .rounded {
+  border-radius: 8px;
+}
+
+/* ensure tables have consistent rad and overflow */
+table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* small responsive tweak for very small phones */
+@media (max-width: 420px) {
+  .w-64 { width: 100% !important; }
+  .grid-cols-1 { grid-template-columns: 1fr !important; }
+}
+
