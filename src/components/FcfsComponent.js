@@ -20,23 +20,37 @@ function FCFS() {
   };
 
   const calculateFCFS = () => {
-    const sorted = [...processes].sort((a, b) => a.arrival - b.arrival);
+    // Validate
+    for (let p of processes) {
+      if (p.arrival === "" || p.burst === "") {
+        alert("Please fill in all Arrival and Burst times.");
+        return;
+      }
+    }
+
+    // Sort by arrival time (as numbers)
+    const sorted = [...processes].sort(
+      (a, b) => Number(a.arrival) - Number(b.arrival)
+    );
 
     let currentTime = 0;
     let results = [];
 
     sorted.forEach((p) => {
-      const start = Math.max(currentTime, Number(p.arrival));
-      const finish = start + Number(p.burst);
+      const arrival = Number(p.arrival);
+      const burst = Number(p.burst);
+
+      const start = Math.max(currentTime, arrival);
+      const finish = start + burst;
 
       results.push({
         id: p.id,
-        arrival: p.arrival,
-        burst: p.burst,
+        arrival,
+        burst,
         start,
         finish,
-        waiting: start - p.arrival,
-        turnaround: finish - p.arrival,
+        waiting: start - arrival,
+        turnaround: finish - arrival,
       });
 
       currentTime = finish;
@@ -46,31 +60,47 @@ function FCFS() {
   };
 
   return (
-    <div>
-      <h1>FCFS Scheduling</h1>
+    <div style={{ padding: "20px" }}>
+      <h1
+        style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "15px" }}
+      >
+        FCFS Scheduling
+      </h1>
 
       {processes.map((p, index) => (
-        <div key={p.id}>
+        <div key={p.id} style={{ marginBottom: "10px" }}>
           <input
             type="number"
             placeholder="Arrival Time"
             value={p.arrival}
             onChange={(e) => handleChange(index, "arrival", e.target.value)}
+            style={{ marginRight: "10px", padding: "5px" }}
           />
           <input
             type="number"
             placeholder="Burst Time"
             value={p.burst}
             onChange={(e) => handleChange(index, "burst", e.target.value)}
+            style={{ padding: "5px" }}
           />
         </div>
       ))}
 
-      <button onClick={addProcess}>Add Process</button>
+      <button onClick={addProcess} style={{ marginRight: "10px" }}>
+        Add Process
+      </button>
       <button onClick={calculateFCFS}>Calculate</button>
 
       {result && (
-        <table border="1" style={{ marginTop: "20px" }}>
+        <table
+          border="1"
+          style={{
+            marginTop: "20px",
+            width: "100%",
+            borderCollapse: "collapse",
+            textAlign: "center",
+          }}
+        >
           <thead>
             <tr>
               <th>Process</th>
