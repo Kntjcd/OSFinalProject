@@ -48,7 +48,7 @@ body {
   font-family: "Orbitron", sans-serif;
   font-weight: 900;
   font-size: 28px;
-  color: white;
+  color: rgb(32, 32, 32);
 }
 
 .nav {
@@ -107,10 +107,9 @@ body {
 /* PROFILE CARD */
 .profile {
   text-align: center;
-  display: flex;
   align-items: center;
   position: sticky;
-  top: 20px;
+  top: 40px;
   align-self: flex-start;
   padding: 30px;
   background: var(--card);
