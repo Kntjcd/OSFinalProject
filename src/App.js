@@ -122,7 +122,7 @@ function App() {
           className="container"
         >
           {/* Profile Card */}
-          <aside className="profile flex justify-center mb-4">
+          <aside className="profile ">
             <img src={profilePic} alt="Profile" className="pfp " />
             <h2>Kent Jeced Alcantara</h2>
             <p>BSIT 3B Student • Photojournalist • Graphic Artist</p>
