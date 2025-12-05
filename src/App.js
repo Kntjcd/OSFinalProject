@@ -1,11 +1,10 @@
 // src/App.js
 import React, { useState } from "react";
+import profilePic from "./assets/profile.jpg";
+import resumePDF from "./assets/resume.pdf";
+import FcfsComponent from "./components/FcfsComponent";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
-
-import ProfileCard from "./components/ProfileCard";
-import FcfsComponent from "./components/FcfsComponent";
-import ContactCard from "./components/ContactCard";
 
 const projects = [
   {
@@ -43,6 +42,41 @@ const projects = [
     description: "Description for project five",
     link: "#",
   },
+  {
+    id: 6,
+    image: "./assets/project6.jpg",
+    title: "Project Six",
+    description: "Description for project six",
+    link: "#",
+  },
+  {
+    id: 7,
+    image: "./assets/project7.jpg",
+    title: "Project Seven",
+    description: "Description for project seven",
+    link: "#",
+  },
+  {
+    id: 8,
+    image: "./assets/project8.jpg",
+    title: "Project Eight",
+    description: "Description for project eight",
+    link: "#",
+  },
+  {
+    id: 9,
+    image: "./assets/project9.jpg",
+    title: "Project Nine",
+    description: "Description for project nine",
+    link: "#",
+  },
+  {
+    id: 10,
+    image: "./assets/project10.jpg",
+    title: "Project Ten",
+    description: "Description for project ten",
+    link: "#",
+  },
 ];
 
 function App() {
@@ -54,6 +88,11 @@ function App() {
   const pageFade = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 0.45 } },
+  };
+
+  const cardPop = {
+    hidden: { opacity: 0, y: 8, scale: 0.98 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.35 } },
   };
 
   return (
@@ -89,20 +128,26 @@ function App() {
           variants={pageFade}
           className="container"
         >
-          {/* Left Column: Sticky Profile */}
+          {/* Profile Card */}
           <aside className="profile">
-            <ProfileCard />
+            <img src={profilePic} alt="Profile" className="pfp" />
+            <h2>Kent Jeced Alcantara</h2>
+            <p>BSIT 3B Student • Photojournalist • Graphic Artist</p>
+            <p>Cordova, Cebu City, Philippines</p>
+            <a href={resumePDF} target="_blank" rel="noopener noreferrer">
+              <button>Download Resume</button>
+            </a>
           </aside>
 
-          {/* Right Column: Scrollable Main Content */}
+          {/* Main Content */}
           <main className="main-content">
-            {/* FCFS Scheduler */}
+            {/* FCFS Component */}
             <section className="fcfs-section">
               <h2>FCFS CPU Scheduling Algorithm</h2>
               <FcfsComponent />
             </section>
 
-            {/* Projects */}
+            {/* Projects Gallery */}
             <section className="projects-section">
               <h2>Projects Gallery</h2>
               <div className="gallery">
@@ -125,11 +170,6 @@ function App() {
                   </a>
                 ))}
               </div>
-            </section>
-
-            {/* Contact */}
-            <section className="contact-section" id="contact">
-              <ContactCard />
             </section>
           </main>
         </motion.div>

@@ -16,6 +16,7 @@ function FcfsComponent() {
       alert("Please fill out all fields.");
       return;
     }
+
     setProcesses([
       ...processes,
       {
@@ -25,6 +26,7 @@ function FcfsComponent() {
         burst: Number(burst),
       },
     ]);
+
     setProcessName("");
     setArrival("");
     setBurst("");
@@ -47,6 +49,7 @@ function FcfsComponent() {
     let time = 0;
     let ganttData = [];
     let output = [];
+
     const sorted = [...processes].sort((a, b) => a.arrival - b.arrival);
 
     sorted.forEach((p, index) => {
@@ -64,6 +67,7 @@ function FcfsComponent() {
         turnaround,
         finish,
       });
+
       time = finish;
     });
 
@@ -77,8 +81,8 @@ function FcfsComponent() {
   };
 
   return (
-    <div className="fcfs-section glass p-4 rounded-2xl shadow-lg">
-      {/* Input Fields */}
+    <div className="fcfs-section">
+      {/* Inputs */}
       <motion.div
         className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-4"
         initial="hidden"
@@ -108,13 +112,13 @@ function FcfsComponent() {
         />
         <button
           onClick={addProcess}
-          className="bg-button-bg text-button-text rounded"
+          className="bg-blue-500 text-white px-4 py-2 rounded"
         >
           Add Process
         </button>
       </motion.div>
 
-      {/* Buttons */}
+      {/* Action Buttons */}
       <motion.div
         className="flex gap-4 mb-4"
         initial="hidden"
@@ -123,20 +127,20 @@ function FcfsComponent() {
       >
         <button
           onClick={calculateFCFS}
-          className="bg-green-600 text-white rounded px-4 py-2"
+          className="bg-green-600 text-white px-4 py-2 rounded"
         >
           Calculate FCFS
         </button>
         <button
           onClick={clearTable}
-          className="bg-red-500 text-white rounded px-4 py-2"
+          className="bg-red-500 text-white px-4 py-2 rounded"
         >
           Clear
         </button>
       </motion.div>
 
       {/* Processes Table */}
-      <div className="mb-4 overflow-x-auto">
+      <div>
         <h4 className="font-semibold mb-2">Processes</h4>
         <AnimatePresence>
           {processes.length === 0 ? (
@@ -151,7 +155,7 @@ function FcfsComponent() {
             </motion.div>
           ) : (
             <motion.table
-              className="w-full table-auto border border-border rounded overflow-hidden bg-card"
+              className="w-full table-auto border border-border rounded overflow-hidden"
               initial="hidden"
               animate="visible"
             >
@@ -182,7 +186,7 @@ function FcfsComponent() {
       </div>
 
       {/* Results Table */}
-      <div className="mb-4 overflow-x-auto">
+      <div className="mt-4">
         <h4 className="font-semibold mb-2">Results</h4>
         <AnimatePresence>
           {results.length === 0 ? (
@@ -197,7 +201,7 @@ function FcfsComponent() {
             </motion.div>
           ) : (
             <motion.table
-              className="w-full table-auto border border-border rounded overflow-hidden bg-card"
+              className="w-full table-auto border border-border rounded overflow-hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -231,9 +235,9 @@ function FcfsComponent() {
       </div>
 
       {/* Gantt Chart */}
-      <div className="mb-4 overflow-x-auto">
+      <div className="mt-4">
         <h4 className="font-semibold mb-2">Gantt Chart</h4>
-        <div className="flex gap-2">
+        <div className="flex gap-2 overflow-x-auto">
           <AnimatePresence>
             {gantt.length === 0 ? (
               <motion.div
