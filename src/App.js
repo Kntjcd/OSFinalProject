@@ -122,8 +122,12 @@ function App() {
           className="container"
         >
           {/* Profile Card */}
-          <aside className="profile-card sticky top-4 p-4 border rounded shadow bg-white dark:bg-gray-800 dark:text-white flex flex-col items-center">
-            <img src={profilePic} alt="Profile" className="pfp" />
+          <aside className="profile">
+            <img
+              src={profilePic}
+              alt="Profile"
+              className="pfp flex justify-center mb-4"
+            />
             <h2>Kent Jeced Alcantara</h2>
             <p>BSIT 3B Student • Photojournalist • Graphic Artist</p>
             <p>Cordova, Cebu City, Philippines</p>
