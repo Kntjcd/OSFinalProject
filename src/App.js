@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import profilePic from "./assets/profile.jpg";
 import resumePDF from "./assets/resume.pdf";
-import FcfsComponent from "./components/FcfsComponent";
+import FcfsComponent from "./components/FcFsComponent";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
 
