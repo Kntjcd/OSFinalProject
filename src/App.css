@@ -261,3 +261,79 @@ input, textarea {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Theme Variables */
+body.light {
+  --bg: #f4f6f8;
+  --card: white;
+  --text: #111;
+  --subtext: #444;
+  --border: #d9d9d9;
+  --button-bg: linear-gradient(135deg,#007bff,#0056d2);
+  --button-text: white;
+}
+
+body.dark {
+  --bg: #0d1117;
+  --card: #161b22;
+  --text: #e9e9e9;
+  --subtext: #b3b3b3;
+  --border: #2b2f36;
+  --button-bg: linear-gradient(135deg,#1f6feb,#1158c7);
+  --button-text: white;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  transition: 0.3s;
+}
+
+/* Cards and Sections */
+.profile, .fcfs-section, .gallery-item, header, footer {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* Buttons */
+button, .profile a {
+  background: var(--button-bg);
+  color: var(--button-text);
+  transition: 0.3s;
+}
+
+/* Profile */
+.profile {
+  text-align: center;
+  position: sticky;
+  top: 20px;
+  padding: 20px;
+  border-radius: 14px;
+}
+
+/* Gallery */
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Scrollable Main */
+main {
+  overflow: auto;
+}
+
+/* Header */
+header a {
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+header a:hover {
+  color: var(--button-bg);
+}
