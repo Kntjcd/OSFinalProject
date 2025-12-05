@@ -23,12 +23,20 @@ body.dark {
   --gantt-bg: #1f6feb;
 }
 
+/* GLOBAL STYLES */
 body {
   background: var(--bg);
   color: var(--text);
   margin: 0;
   font-family: "Inter", sans-serif;
   transition: 0.3s;
+}
+
+/* GLASS EFFECT */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 /* HEADER / NAVBAR */
@@ -144,6 +152,17 @@ body {
   box-shadow: 0 6px 14px rgba(0,0,0,0.08);
 }
 
+.fcfs-section input,
+.fcfs-section button {
+  background: var(--card);
+  color: var(--text);
+}
+
+.fcfs-section button {
+  background: var(--button-bg);
+  color: var(--button-text);
+}
+
 /* PROJECTS GALLERY */
 .projects-section {
   width: 100%;
@@ -208,6 +227,47 @@ input, textarea {
   border: 1px solid var(--border);
   border-radius: 6px;
   transition: 0.3s;
+}
+
+/* CONTACT CARD */
+.contact-card input,
+.contact-card textarea {
+  width: 100%;
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 8px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+.contact-card textarea {
+  resize: vertical;
+}
+
+/* TABLES */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: rgba(0, 123, 255, 0.15);
+}
+
+/* GANTT CHART */
+.bg-gantt {
+  background: var(--gantt-bg);
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px;
+  min-width: 60px;
+  text-align: center;
 }
 
 /* FOOTER */

@@ -1,78 +1,89 @@
 // src/App.js
 import React, { useState } from "react";
-import profilePic from "./assets/profile.jpg";
-import resumePDF from "./assets/resume.pdf";
+import ProfileCard from "./components/ProfileCard";
 import FcfsComponent from "./components/FcFsComponent";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
 
+// Import project images
+import project1 from "./assets/project1.jpg";
+import project2 from "./assets/project2.jpg";
+import project3 from "./assets/project3.jpg";
+import project4 from "./assets/project4.jpg";
+import project5 from "./assets/project5.jpg";
+import project6 from "./assets/project6.jpg";
+import project7 from "./assets/project7.jpg";
+import project8 from "./assets/project8.jpg";
+import project9 from "./assets/project9.jpg";
+import project10 from "./assets/project10.jpg";
+
 const projects = [
   {
     id: 1,
-    image: "./assets/project1.jpg",
+    image: project1,
     title: "Project One",
     description: "Description for project one",
     link: "#",
   },
   {
     id: 2,
-    image: "./assets/project2.jpg",
+    image: project2,
     title: "Project Two",
     description: "Description for project two",
     link: "#",
   },
   {
     id: 3,
-    image: "./assets/project3.jpg",
+    image: project3,
     title: "Project Three",
     description: "Description for project three",
     link: "#",
   },
   {
     id: 4,
-    image: "./assets/project4.jpg",
+    image: project4,
     title: "Project Four",
     description: "Description for project four",
     link: "#",
   },
   {
     id: 5,
-    image: "./assets/project5.jpg",
+    image: project5,
     title: "Project Five",
     description: "Description for project five",
     link: "#",
   },
   {
     id: 6,
-    image: "./assets/project6.jpg",
+    image: project6,
     title: "Project Six",
     description: "Description for project six",
     link: "#",
   },
   {
     id: 7,
-    image: "./assets/project7.jpg",
+    image: project7,
     title: "Project Seven",
     description: "Description for project seven",
     link: "#",
   },
   {
     id: 8,
-    image: "./assets/project8.jpg",
+    image: project8,
     title: "Project Eight",
     description: "Description for project eight",
     link: "#",
   },
   {
     id: 9,
-    image: "./assets/project9.jpg",
+    image: project9,
     title: "Project Nine",
     description: "Description for project nine",
     link: "#",
   },
   {
     id: 10,
-    image: "./assets/project10.jpg",
+    image: project10,
     title: "Project Ten",
     description: "Description for project ten",
     link: "#",
@@ -88,10 +99,6 @@ function App() {
   const pageFade = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 0.45 } },
-  };
-  const cardPop = {
-    hidden: { opacity: 0, y: 8, scale: 0.98 },
-    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.35 } },
   };
 
   return (
@@ -127,16 +134,8 @@ function App() {
           variants={pageFade}
           className="container"
         >
-          {/* Profile Card */}
-          <aside className="profile">
-            <img src={profilePic} alt="Profile" className="pfp" />
-            <h2>Kent Jeced Alcantara</h2>
-            <p>BSIT 3B Student • Photojournalist • Graphic Artist</p>
-            <p>Cordova, Cebu City, Philippines</p>
-            <a href={resumePDF} target="_blank" rel="noopener noreferrer">
-              <button>Download Resume</button>
-            </a>
-          </aside>
+          {/* Sticky Profile Card */}
+          <ProfileCard />
 
           {/* Main Content */}
           <main className="main-content">
@@ -158,10 +157,7 @@ function App() {
                     rel="noopener noreferrer"
                     className="gallery-item"
                   >
-                    <img
-                      src={require(`${project.image}`)}
-                      alt={project.title}
-                    />
+                    <img src={project.image} alt={project.title} />
                     <div className="p-2">
                       <h3 className="font-bold">{project.title}</h3>
                       <p className="text-sm">{project.description}</p>
