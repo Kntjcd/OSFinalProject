@@ -99,22 +99,16 @@ function App() {
       {/* Navbar */}
       <header className="header">
         <div className="logo">KJA</div>
-        <nav className={`nav ${menuOpen ? "open" : ""}`}>
-          <a href="#about">ABOUT ME</a>
-          <a href="#resume">RESUME</a>
-          <a href="#contact">CONTACT</a>
-          <a
-            href="https://github.com/Kntjcd"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="github-btn"
-          >
-            <FaGithub />
-          </a>
-          <button className="theme-toggle" onClick={toggleTheme}>
-            {darkMode ? "☀️" : "🌙"}
-          </button>
-        </nav>
+
+        <a
+          href="https://github.com/Kntjcd"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="github-btn"
+        >
+          <FaGithub />
+        </a>
+
         <div className="burger" onClick={() => setMenuOpen(!menuOpen)}>
           ☰
         </div>
