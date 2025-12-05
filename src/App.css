@@ -1,103 +1,98 @@
-/* ==========================
-   THEME VARIABLES
-========================== */
-body.light {
-  --bg: #f4f6f8;
-  --card: white;
-  --text: #111;
-  --subtext: #444;
-  --border: #d9d9d9;
-  --button-bg: linear-gradient(135deg, #007bff, #0056d2);
-  --button-text: white;
-  --input-bg: #fff;
-  --input-text: #111;
-  --gantt-bg: #007bff;
-}
-
-body.dark {
-  --bg: #0d1117;
-  --card: #161b22;
-  --text: #e9e9e9;
-  --subtext: #b3b3b3;
-  --border: #2b2f36;
-  --button-bg: linear-gradient(135deg, #1f6feb, #1158c7);
-  --button-text: white;
-  --input-bg: #1f1f1f;
-  --input-text: #f2f2f2;
-  --gantt-bg: #1f6feb;
-}
-
+/* =========================================================
+   GLOBAL RESET – Tailwind controls colors & dark mode
+========================================================= */
 body {
-  background: var(--bg);
-  color: var(--text);
   margin: 0;
+  padding: 0;
   font-family: "Inter", sans-serif;
-  transition: 0.3s;
+  transition: background 0.3s, color 0.3s;
+  overflow-x: hidden;
 }
 
-/* HEADER */
+/* =========================================================
+   HEADER / NAVIGATION
+========================================================= */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
-  background: var(--card);
-  border-bottom: 1px solid var(--border);
+  padding: 18px 36px;
+  background: white;
+  border-bottom: 1px solid #e2e2e2;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
+.dark .header {
+  background: #161b22;
+  border-bottom-color: #2d333b;
+}
+
+/* LOGO */
 .logo {
   font-family: "Orbitron", sans-serif;
   font-weight: 900;
-  font-size: 28px;
-  color: var(--button-bg);
+  font-size: 26px;
 }
 
+/* NAV LINKS */
 .nav {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 22px;
   transition: 0.3s;
 }
 
 .nav a {
-  color: var(--text);
   text-decoration: none;
   font-weight: 600;
-  transition: 0.3s;
 }
 
 .nav a:hover {
-  color: var(--button-bg);
+  opacity: 0.7;
 }
 
-.github-btn {
-  font-size: 22px;
-}
-
-.theme-toggle {
-  background: var(--button-bg);
-  border: none;
-  padding: 8px 10px;
-  border-radius: 50%;
-  color: var(--button-text);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-}
-
+/* BURGER FOR MOBILE */
 .burger {
   display: none;
-  font-size: 24px;
+  font-size: 28px;
   cursor: pointer;
-  color: var(--text);
 }
 
-/* CONTAINER */
+@media (max-width: 900px) {
+  .burger {
+    display: block;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -260px;
+    height: 100%;
+    width: 260px;
+    background: white;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 70px 22px;
+    gap: 25px;
+    transition: 0.32s ease;
+    border-left: 1px solid #e2e2e2;
+  }
+
+  .dark .nav {
+    background: #161b22;
+    border-left-color: #2d333b;
+  }
+
+  .nav.open {
+    right: 0;
+  }
+}
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
 .container {
   display: flex;
   gap: 40px;
@@ -108,160 +103,145 @@ body {
   justify-content: center;
 }
 
-/* PROFILE */
+/* =========================================================
+   STICKY PROFILE CARD
+========================================================= */
 .profile {
   text-align: center;
   position: sticky;
   top: 20px;
   align-self: flex-start;
   padding: 30px;
-  background: var(--card);
+  background: white;
   border-radius: 14px;
-  border: 1px solid var(--border);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e2e2;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
   min-width: 280px;
-  max-width: 500px;
+  max-width: 420px;
+}
+
+.dark .profile {
+  background: #161b22;
+  border-color: #2d333b;
 }
 
 .pfp {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  margin-bottom: 15px;
-  border: 4px solid var(--button-bg);
+  margin-bottom: 18px;
+  object-fit: cover;
+  border: 4px solid #3b82f6;
 }
 
-/* RESUME */
+/* =========================================================
+   RESUME SECTION (scrollable)
+========================================================= */
 .resume {
   flex: 1;
   max-height: 90vh;
   overflow-y: auto;
   padding: 30px;
-  background: var(--card);
+  background: white;
   border-radius: 14px;
-  border: 1px solid var(--border);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e2e2;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
   min-width: 280px;
   max-width: 700px;
 }
 
-/* BUTTONS */
-button {
-  background: var(--button-bg);
-  color: var(--button-text);
-  padding: 12px 18px;
-  margin: 6px 0;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s;
+.dark .resume {
+  background: #161b22;
+  border-color: #2d333b;
 }
 
-button:hover {
-  opacity: 0.85;
+/* Hide scroll bar visually (optional) */
+.resume::-webkit-scrollbar {
+  width: 6px;
+}
+.resume::-webkit-scrollbar-thumb {
+  background: #c5c5c5;
+  border-radius: 20px;
+}
+.dark .resume::-webkit-scrollbar-thumb {
+  background: #30363d;
 }
 
-input, textarea {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 12px;
-  background: var(--input-bg);
-  color: var(--input-text);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  transition: 0.3s;
-}
-
-/* GALLERY */
+/* =========================================================
+   PROJECT GALLERY (10 items, clickable)
+========================================================= */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 15px;
-  margin-top: 15px;
+  gap: 18px;
+  margin-top: 16px;
 }
 
 .gallery-item {
+  border-radius: 12px;
+  border: 1px solid #e2e2e2;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  aspect-ratio: 1 / 1; /* Make all items consistent */
+  display: block;
+}
+
+.dark .gallery-item {
+  border-color: #2d333b;
+}
+
+.gallery-item img {
   width: 100%;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  transition: 0.3s;
+  height: 100%;
+  object-fit: cover;
 }
 
 .gallery-item:hover {
-  transform: scale(1.04);
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.20);
 }
 
-/* MODAL, TABLE, GANTT remain same as previous code */
-
-/* RESPONSIVE - BURGER MENU */
-@media (max-width: 900px) {
-  .nav {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    height: 100%;
-    width: 250px;
-    background: var(--card);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 60px 20px;
-    gap: 25px;
-    transition: 0.3s;
-    z-index: 999;
-  }
-
-  .nav.open {
-    right: 0;
-  }
-
-  .burger {
-    display: block;
-  }
+/* =========================================================
+   BUTTON BEHAVIOR
+========================================================= */
+button:active {
+  transform: scale(0.96);
 }
 
+/* =========================================================
+   TABLE + GANTT CHART
+========================================================= */
+table {
+  border-radius: 10px;
+  overflow: hidden;
+}
 
+/* Gantt blocks */
+.gantt .rounded {
+  border-radius: 8px;
+}
+
+/* =========================================================
+   MOBILE FIXES
+========================================================= */
 @media (max-width: 900px) {
   .profile {
-    position: static; /* Remove sticky on mobile */
-    top: auto;
+    position: static;
     width: 90%;
-    max-width: 500px;
+    max-width: 480px;
     margin: 15px auto;
   }
 
   .resume {
     width: 90%;
-    max-width: 500px;
-    max-height: none; /* Let it scroll naturally */
+    max-width: 480px;
+    max-height: none;
   }
 }
 
-/* --- subtle card hover for project items --- */
-.bg-gray-100:hover {
-  transform: translateY(-4px);
-  transition: transform 0.18s ease;
-}
-
-/* smoother button tap */
-button:active {
-  transform: scale(0.98);
-}
-
-/* gantt block rounding */
-.gantt .rounded {
-  border-radius: 8px;
-}
-
-/* ensure tables have consistent rad and overflow */
-table {
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-/* small responsive tweak for very small phones */
 @media (max-width: 420px) {
-  .w-64 { width: 100% !important; }
-  .grid-cols-1 { grid-template-columns: 1fr !important; }
+  .w-64 {
+    width: 100% !important;
+  }
 }
-
