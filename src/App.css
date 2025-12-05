@@ -128,7 +128,7 @@ body {
 
     align-self: flex-start; /* already good */
   height: auto !important;   /* <-- ADD THIS */
-  flex-grow: 0 !important;   /* <-- ADD THIS */
+  flex-grow: 0 !important;   /* <-- ADD THIS ... already added*/
   flex-shrink: 0;  
 }
 
