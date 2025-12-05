@@ -106,19 +106,27 @@ body {
 
 /* PROFILE CARD */
 .profile {
-  text-align: center;
-  align-items: center;
   position: sticky;
   top: 40px;
-  align-self: flex-start;
+
+  /* NEW: Make it a flex column and center everything */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
   padding: 30px;
   background: var(--card);
   border-radius: 14px;
   border: 1px solid var(--border);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+
   min-width: 280px;
   max-width: 350px;
 }
+
 
 .pfp {
   width: 150px;
@@ -127,6 +135,7 @@ body {
   margin-bottom: 15px;
   border: 4px solid var(--button-bg);
 }
+
 
 /* MAIN CONTENT */
 .main-content {
