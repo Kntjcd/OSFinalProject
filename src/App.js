@@ -1,108 +1,197 @@
+// src/App.js
 import React, { useState } from "react";
+import profilePic from "./assets/profile.jpg";
+import resumePDF from "./assets/resume.pdf";
+import FcfsComponent from "./components/FcfsComponent";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
-import { BsSun, BsMoon } from "react-icons/bs";
-import ProfileCard from "./components/ProfileCard";
-import FCFS from "./components/FCFS";
+
+const projects = [
+  {
+    id: 1,
+    image: "./assets/project1.jpg",
+    title: "Project One",
+    description: "Description for project one",
+    link: "#",
+  },
+  {
+    id: 2,
+    image: "./assets/project2.jpg",
+    title: "Project Two",
+    description: "Description for project two",
+    link: "#",
+  },
+  {
+    id: 3,
+    image: "./assets/project3.jpg",
+    title: "Project Three",
+    description: "Description for project three",
+    link: "#",
+  },
+  {
+    id: 4,
+    image: "./assets/project4.jpg",
+    title: "Project Four",
+    description: "Description for project four",
+    link: "#",
+  },
+  {
+    id: 5,
+    image: "./assets/project5.jpg",
+    title: "Project Five",
+    description: "Description for project five",
+    link: "#",
+  },
+  {
+    id: 6,
+    image: "./assets/project6.jpg",
+    title: "Project Six",
+    description: "Description for project six",
+    link: "#",
+  },
+  {
+    id: 7,
+    image: "./assets/project7.jpg",
+    title: "Project Seven",
+    description: "Description for project seven",
+    link: "#",
+  },
+  {
+    id: 8,
+    image: "./assets/project8.jpg",
+    title: "Project Eight",
+    description: "Description for project eight",
+    link: "#",
+  },
+  {
+    id: 9,
+    image: "./assets/project9.jpg",
+    title: "Project Nine",
+    description: "Description for project nine",
+    link: "#",
+  },
+  {
+    id: 10,
+    image: "./assets/project10.jpg",
+    title: "Project Ten",
+    description: "Description for project ten",
+    link: "#",
+  },
+];
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleTheme = () => setDarkMode(!darkMode);
 
-  const projects = Array.from({ length: 10 }, (_, i) => ({
-    id: i + 1,
-    img: `/projects/p${i + 1}.jpg`,
-  }));
+  const pageFade = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.45 } },
+  };
+  const cardPop = {
+    hidden: { opacity: 0, y: 8, scale: 0.98 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.35 } },
+  };
 
   return (
-    <div className={darkMode ? "dark" : ""}>
-      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
-        {/* NAVBAR */}
-        <nav className="w-full px-6 py-4 flex justify-between items-center backdrop-blur-md bg-white/60 dark:bg-gray-800/60 shadow-lg sticky top-0 z-50 border-b border-gray-300 dark:border-gray-700">
-          {/* LEFT — LOGO */}
-          <h1 className="text-3xl font-extrabold tracking-wider text-blue-600 dark:text-blue-400">
-            KJA
-          </h1>
-
-          {/* MIDDLE — MENU */}
-          <ul className="hidden md:flex gap-10 font-semibold">
-            {["ABOUT ME", "RESUME", "CONTACTS"].map((item) => (
-              <li key={item} className="cursor-pointer relative group text-lg">
-                {item}
-                <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
-              </li>
-            ))}
-          </ul>
-
-          {/* RIGHT — ICONS */}
-          <div className="flex gap-5 items-center">
-            <a
-              href="https://github.com/Kntjcd"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaGithub
-                size={26}
-                className="cursor-pointer hover:text-blue-500 transition"
-              />
-            </a>
-
-            {/* DARK MODE TOGGLE */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 shadow-md hover:scale-110 transition"
-            >
-              {darkMode ? (
-                <BsSun size={22} className="text-yellow-400" />
-              ) : (
-                <BsMoon size={22} className="text-blue-500" />
-              )}
-            </button>
-          </div>
+    <div className={darkMode ? "dark" : "light"}>
+      {/* Navbar */}
+      <header className="header">
+        <div className="logo">KJA</div>
+        <nav className={`nav ${menuOpen ? "open" : ""}`}>
+          <a href="#about">ABOUT ME</a>
+          <a href="#resume">RESUME</a>
+          <a href="#contact">CONTACT</a>
+          <a
+            href="https://github.com/Kntjcd"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="github-btn"
+          >
+            <FaGithub />
+          </a>
+          <button className="theme-toggle" onClick={toggleTheme}>
+            {darkMode ? "☀️" : "🌙"}
+          </button>
         </nav>
+        <div className="burger" onClick={() => setMenuOpen(!menuOpen)}>
+          ☰
+        </div>
+      </header>
 
-        {/* MAIN LAYOUT */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 py-10">
-          {/* LEFT — STICKY PROFILE CARD */}
-          <div className="md:col-span-1 sticky top-28 h-fit">
-            <ProfileCard />
-          </div>
+      <AnimatePresence>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={pageFade}
+          className="container"
+        >
+          {/* Profile Card */}
+          <aside className="profile">
+            <img src={profilePic} alt="Profile" className="pfp" />
+            <h2>Kent Jeced Alcantara</h2>
+            <p>BSIT 3B Student • Photojournalist • Graphic Artist</p>
+            <p>Cordova, Cebu City, Philippines</p>
+            <a href={resumePDF} target="_blank" rel="noopener noreferrer">
+              <button>Download Resume</button>
+            </a>
+          </aside>
 
-          {/* RIGHT — CONTENT */}
-          <div className="md:col-span-2 space-y-12">
-            {/* PROJECT GALLERY */}
-            <section className="glass rounded-2xl p-6 shadow-xl">
-              <h2 className="section-title">Project Gallery</h2>
+          {/* Main Content */}
+          <main className="main-content">
+            {/* FCFS Component */}
+            <section className="fcfs-section">
+              <h2>FCFS CPU Scheduling Algorithm</h2>
+              <FcfsComponent />
+            </section>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
-                {projects.map((p) => (
+            {/* Projects Gallery */}
+            <section className="projects-section">
+              <h2>Projects Gallery</h2>
+              <div className="gallery">
+                {projects.map((project) => (
                   <a
-                    key={p.id}
-                    href={p.img}
+                    key={project.id}
+                    href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group"
+                    className="gallery-item"
                   >
-                    <div className="overflow-hidden rounded-xl shadow-md">
-                      <img
-                        src={p.img}
-                        alt={`Project ${p.id}`}
-                        className="w-full h-44 object-cover group-hover:scale-110 transition duration-300"
-                      />
+                    <img
+                      src={require(`${project.image}`)}
+                      alt={project.title}
+                    />
+                    <div className="p-2">
+                      <h3 className="font-bold">{project.title}</h3>
+                      <p className="text-sm">{project.description}</p>
                     </div>
                   </a>
                 ))}
               </div>
             </section>
+          </main>
+        </motion.div>
+      </AnimatePresence>
 
-            {/* FCFS CPU SCHEDULING */}
-            <section className="glass rounded-2xl p-6 shadow-xl">
-              <h2 className="section-title">FCFS CPU Scheduling Algorithm</h2>
-              <FCFS />
-            </section>
-          </div>
+      {/* Footer */}
+      <footer className="footer">
+        <p>
+          &copy; {new Date().getFullYear()} Kent Jeced Alcantara. All rights
+          reserved.
+        </p>
+        <div className="flex justify-center gap-4 mt-2">
+          <a
+            href="https://github.com/Kntjcd"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+          <a href="mailto:alcantarakentjeced@gmail.com">Email</a>
+          <a href="#contact">Contact</a>
         </div>
-      </div>
+      </footer>
     </div>
   );
 }

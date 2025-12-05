@@ -77,9 +77,9 @@ function FcfsComponent() {
   };
 
   return (
-    <div>
+    <div className="fcfs-section">
       <motion.div
-        className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-2"
+        className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-4"
         initial="hidden"
         animate="visible"
         variants={fadeIn}
@@ -89,27 +89,27 @@ function FcfsComponent() {
           onChange={(e) => setProcessName(e.target.value)}
           type="text"
           placeholder="Process Name"
-          className="p-2 border rounded"
+          className="p-2 border rounded bg-card text-text"
         />
         <input
           value={arrival}
           onChange={(e) => setArrival(e.target.value)}
           type="number"
           placeholder="Arrival Time"
-          className="p-2 border rounded"
+          className="p-2 border rounded bg-card text-text"
         />
         <input
           value={burst}
           onChange={(e) => setBurst(e.target.value)}
           type="number"
           placeholder="Burst Time"
-          className="p-2 border rounded"
+          className="p-2 border rounded bg-card text-text"
         />
         <button
           onClick={addProcess}
           className="bg-blue-500 text-white px-4 py-2 rounded"
         >
-          Add
+          Add Process
         </button>
       </motion.div>
 
@@ -133,7 +133,7 @@ function FcfsComponent() {
         </button>
       </motion.div>
 
-      {/* Preview processes */}
+      {/* Processes Table */}
       <div>
         <h4 className="font-semibold mb-2">Processes</h4>
         <AnimatePresence>
@@ -143,14 +143,18 @@ function FcfsComponent() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="text-sm text-gray-500"
+              className="text-sm text-subtext"
             >
               No processes added.
             </motion.div>
           ) : (
-            <motion.table className="w-full table-auto border">
-              <thead>
-                <tr className="bg-gray-200 dark:bg-gray-700">
+            <motion.table
+              className="w-full table-auto border border-border rounded overflow-hidden"
+              initial="hidden"
+              animate="visible"
+            >
+              <thead className="bg-gray-200 dark:bg-gray-700">
+                <tr>
                   <th className="p-2 border">Process</th>
                   <th className="p-2 border">Arrival</th>
                   <th className="p-2 border">Burst</th>
@@ -160,9 +164,9 @@ function FcfsComponent() {
                 {processes.map((p) => (
                   <motion.tr
                     key={p.id}
-                    initial={{ opacity: 0, x: -8 }}
+                    initial={{ opacity: 0, x: -6 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 8 }}
+                    exit={{ opacity: 0, x: 6 }}
                   >
                     <td className="p-2 border">{p.pid}</td>
                     <td className="p-2 border">{p.arrival}</td>
@@ -175,7 +179,7 @@ function FcfsComponent() {
         </AnimatePresence>
       </div>
 
-      {/* Results */}
+      {/* Results Table */}
       <div className="mt-4">
         <h4 className="font-semibold mb-2">Results</h4>
         <AnimatePresence>
@@ -185,19 +189,19 @@ function FcfsComponent() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="text-sm text-gray-500"
+              className="text-sm text-subtext"
             >
               No results yet.
             </motion.div>
           ) : (
             <motion.table
-              className="w-full table-auto border"
+              className="w-full table-auto border border-border rounded overflow-hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <thead>
-                <tr className="bg-gray-200 dark:bg-gray-700">
+              <thead className="bg-gray-200 dark:bg-gray-700">
+                <tr>
                   <th className="p-2 border">Process</th>
                   <th className="p-2 border">Waiting</th>
                   <th className="p-2 border">Turnaround</th>
@@ -224,10 +228,10 @@ function FcfsComponent() {
         </AnimatePresence>
       </div>
 
-      {/* Gantt */}
+      {/* Gantt Chart */}
       <div className="mt-4">
         <h4 className="font-semibold mb-2">Gantt Chart</h4>
-        <div className="flex gap-2">
+        <div className="flex gap-2 overflow-x-auto">
           <AnimatePresence>
             {gantt.length === 0 ? (
               <motion.div
@@ -235,9 +239,9 @@ function FcfsComponent() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="text-sm text-gray-500"
+                className="text-sm text-subtext"
               >
-                No Gantt to display
+                No Gantt chart to display
               </motion.div>
             ) : (
               gantt.map((g) => (
@@ -248,7 +252,7 @@ function FcfsComponent() {
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.98, opacity: 0 }}
                   transition={{ duration: 0.28 }}
-                  className="border p-2 bg-blue-300 dark:bg-blue-800 text-center rounded"
+                  className="border rounded p-2 text-center bg-gantt text-white min-w-[60px]"
                   style={{ minWidth: Math.max((g.finish - g.start) * 36, 60) }}
                 >
                   <div className="font-bold">{g.pid}</div>
