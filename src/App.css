@@ -124,7 +124,7 @@ body {
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
 
   min-width: 280px;
-  max-width: 350px;
+  max-width: auto;
 }
 
 
