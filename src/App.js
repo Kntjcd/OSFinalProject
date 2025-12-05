@@ -9,32 +9,29 @@ function App() {
 
   const toggleTheme = () => setDarkMode(!darkMode);
 
-  const projects = [
-    { id: 1, img: "/projects/p1.jpg" },
-    { id: 2, img: "/projects/p2.jpg" },
-    { id: 3, img: "/projects/p3.jpg" },
-    { id: 4, img: "/projects/p4.jpg" },
-    { id: 5, img: "/projects/p5.jpg" },
-    { id: 6, img: "/projects/p6.jpg" },
-    { id: 7, img: "/projects/p7.jpg" },
-    { id: 8, img: "/projects/p8.jpg" },
-    { id: 9, img: "/projects/p9.jpg" },
-    { id: 10, img: "/projects/p10.jpg" },
-  ];
+  const projects = Array.from({ length: 10 }, (_, i) => ({
+    id: i + 1,
+    img: `/projects/p${i + 1}.jpg`,
+  }));
 
   return (
     <div className={darkMode ? "dark" : ""}>
-      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
+      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
         {/* NAVBAR */}
-        <nav className="w-full px-6 py-4 flex justify-between items-center bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
+        <nav className="w-full px-6 py-4 flex justify-between items-center backdrop-blur-md bg-white/60 dark:bg-gray-800/60 shadow-lg sticky top-0 z-50 border-b border-gray-300 dark:border-gray-700">
           {/* LEFT — LOGO */}
-          <h1 className="text-2xl font-bold tracking-wider">KJA</h1>
+          <h1 className="text-3xl font-extrabold tracking-wider text-blue-600 dark:text-blue-400">
+            KJA
+          </h1>
 
           {/* MIDDLE — MENU */}
-          <ul className="hidden md:flex gap-6 font-semibold">
-            <li className="cursor-pointer hover:text-blue-500">ABOUT ME</li>
-            <li className="cursor-pointer hover:text-blue-500">RESUME</li>
-            <li className="cursor-pointer hover:text-blue-500">CONTACTS</li>
+          <ul className="hidden md:flex gap-10 font-semibold">
+            {["ABOUT ME", "RESUME", "CONTACTS"].map((item) => (
+              <li key={item} className="cursor-pointer relative group text-lg">
+                {item}
+                <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+              </li>
+            ))}
           </ul>
 
           {/* RIGHT — ICONS */}
@@ -46,52 +43,61 @@ function App() {
             >
               <FaGithub
                 size={26}
-                className="cursor-pointer hover:text-blue-400"
+                className="cursor-pointer hover:text-blue-500 transition"
               />
             </a>
 
-            {/* LIGHT / DARK TOGGLE */}
-            <button onClick={toggleTheme} className="text-xl">
-              {darkMode ? <BsSun size={25} /> : <BsMoon size={25} />}
+            {/* DARK MODE TOGGLE */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 shadow-md hover:scale-110 transition"
+            >
+              {darkMode ? (
+                <BsSun size={22} className="text-yellow-400" />
+              ) : (
+                <BsMoon size={22} className="text-blue-500" />
+              )}
             </button>
           </div>
         </nav>
 
-        {/* CONTENT GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
-          {/* LEFT — PROFILE CARD (STICKY) */}
-          <div className="md:col-span-1 sticky top-24 h-fit">
+        {/* MAIN LAYOUT */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 py-10">
+          {/* LEFT — STICKY PROFILE CARD */}
+          <div className="md:col-span-1 sticky top-28 h-fit">
             <ProfileCard />
           </div>
 
-          {/* RIGHT — MAIN CONTENT */}
-          <div className="md:col-span-2 space-y-10">
+          {/* RIGHT — CONTENT */}
+          <div className="md:col-span-2 space-y-12">
             {/* PROJECT GALLERY */}
-            <section>
-              <h2 className="text-2xl font-bold mb-4">Project Gallery</h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <section className="glass rounded-2xl p-6 shadow-xl">
+              <h2 className="section-title">Project Gallery</h2>
+
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
                 {projects.map((p) => (
                   <a
                     key={p.id}
                     href={p.img}
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="group"
                   >
-                    <img
-                      src={p.img}
-                      className="w-full h-40 object-cover rounded-lg shadow-md hover:scale-105 transition"
-                      alt={`Project ${p.id}`}
-                    />
+                    <div className="overflow-hidden rounded-xl shadow-md">
+                      <img
+                        src={p.img}
+                        alt={`Project ${p.id}`}
+                        className="w-full h-44 object-cover group-hover:scale-110 transition duration-300"
+                      />
+                    </div>
                   </a>
                 ))}
               </div>
             </section>
 
-            {/* FCFS CPU SCHEDULING COMPONENT */}
-            <section>
-              <h2 className="text-2xl font-bold mb-4">
-                FCFS CPU Scheduling Algorithm
-              </h2>
+            {/* FCFS CPU SCHEDULING */}
+            <section className="glass rounded-2xl p-6 shadow-xl">
+              <h2 className="section-title">FCFS CPU Scheduling Algorithm</h2>
               <FCFS />
             </section>
           </div>
