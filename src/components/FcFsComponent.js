@@ -252,7 +252,7 @@ function FcfsComponent() {
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.98, opacity: 0 }}
                   transition={{ duration: 0.28 }}
-                  className="border rounded p-2 text-center bg-gantt text-white min-w-[60px]"
+                  className="border rounded p-2 text-center bg-gantt text-blue min-w-[60px]"
                   style={{ minWidth: Math.max((g.finish - g.start) * 36, 60) }}
                 >
                   <div className="font-bold">{g.pid}</div>
