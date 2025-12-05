@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import profilePic from "./assets/profile.jpg";
 import resumePDF from "./assets/resume.pdf";
-import FcfsComponent from "./components/FcfsComponent";
+import FcfsComponent from "./components/FcFsComponent";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
 
@@ -89,7 +89,6 @@ function App() {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 0.45 } },
   };
-
   const cardPop = {
     hidden: { opacity: 0, y: 8, scale: 0.98 },
     visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.35 } },

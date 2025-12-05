@@ -16,7 +16,6 @@ function FcfsComponent() {
       alert("Please fill out all fields.");
       return;
     }
-
     setProcesses([
       ...processes,
       {
@@ -26,7 +25,6 @@ function FcfsComponent() {
         burst: Number(burst),
       },
     ]);
-
     setProcessName("");
     setArrival("");
     setBurst("");
@@ -49,7 +47,6 @@ function FcfsComponent() {
     let time = 0;
     let ganttData = [];
     let output = [];
-
     const sorted = [...processes].sort((a, b) => a.arrival - b.arrival);
 
     sorted.forEach((p, index) => {
@@ -67,7 +64,6 @@ function FcfsComponent() {
         turnaround,
         finish,
       });
-
       time = finish;
     });
 
@@ -82,7 +78,6 @@ function FcfsComponent() {
 
   return (
     <div className="fcfs-section">
-      {/* Inputs */}
       <motion.div
         className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-4"
         initial="hidden"
@@ -118,7 +113,6 @@ function FcfsComponent() {
         </button>
       </motion.div>
 
-      {/* Action Buttons */}
       <motion.div
         className="flex gap-4 mb-4"
         initial="hidden"
