@@ -321,3 +321,41 @@ th {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Contact Card */
+.contact-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 40px auto;
+}
+
+.contact-card input,
+.contact-card textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card);
+  color: var(--text);
+}
+
+.contact-card button {
+  background: var(--button-bg);
+  color: var(--button-text);
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.contact-card button:hover {
+  opacity: 0.85;
+}

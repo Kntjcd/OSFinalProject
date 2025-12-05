@@ -1,91 +1,46 @@
 // src/App.js
 import React, { useState } from "react";
-import ProfileCard from "./components/ProfileCard";
-import FcfsComponent from "./components/FcFsComponent";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
 
-// Import project images
-import project1 from "./assets/project1.jpg";
-import project2 from "./assets/project2.jpg";
-import project3 from "./assets/project3.jpg";
-import project4 from "./assets/project4.jpg";
-import project5 from "./assets/project5.jpg";
-import project6 from "./assets/project6.jpg";
-import project7 from "./assets/project7.jpg";
-import project8 from "./assets/project8.jpg";
-import project9 from "./assets/project9.jpg";
-import project10 from "./assets/project10.jpg";
+import ProfileCard from "./components/ProfileCard";
+import FcfsComponent from "./components/FcfsComponent";
+import ContactCard from "./components/ContactCard";
 
 const projects = [
   {
     id: 1,
-    image: project1,
+    image: "./assets/project1.jpg",
     title: "Project One",
     description: "Description for project one",
     link: "#",
   },
   {
     id: 2,
-    image: project2,
+    image: "./assets/project2.jpg",
     title: "Project Two",
     description: "Description for project two",
     link: "#",
   },
   {
     id: 3,
-    image: project3,
+    image: "./assets/project3.jpg",
     title: "Project Three",
     description: "Description for project three",
     link: "#",
   },
   {
     id: 4,
-    image: project4,
+    image: "./assets/project4.jpg",
     title: "Project Four",
     description: "Description for project four",
     link: "#",
   },
   {
     id: 5,
-    image: project5,
+    image: "./assets/project5.jpg",
     title: "Project Five",
     description: "Description for project five",
-    link: "#",
-  },
-  {
-    id: 6,
-    image: project6,
-    title: "Project Six",
-    description: "Description for project six",
-    link: "#",
-  },
-  {
-    id: 7,
-    image: project7,
-    title: "Project Seven",
-    description: "Description for project seven",
-    link: "#",
-  },
-  {
-    id: 8,
-    image: project8,
-    title: "Project Eight",
-    description: "Description for project eight",
-    link: "#",
-  },
-  {
-    id: 9,
-    image: project9,
-    title: "Project Nine",
-    description: "Description for project nine",
-    link: "#",
-  },
-  {
-    id: 10,
-    image: project10,
-    title: "Project Ten",
-    description: "Description for project ten",
     link: "#",
   },
 ];
@@ -134,18 +89,20 @@ function App() {
           variants={pageFade}
           className="container"
         >
-          {/* Sticky Profile Card */}
-          <ProfileCard />
+          {/* Left Column: Sticky Profile */}
+          <aside className="profile">
+            <ProfileCard />
+          </aside>
 
-          {/* Main Content */}
+          {/* Right Column: Scrollable Main Content */}
           <main className="main-content">
-            {/* FCFS Component */}
+            {/* FCFS Scheduler */}
             <section className="fcfs-section">
               <h2>FCFS CPU Scheduling Algorithm</h2>
               <FcfsComponent />
             </section>
 
-            {/* Projects Gallery */}
+            {/* Projects */}
             <section className="projects-section">
               <h2>Projects Gallery</h2>
               <div className="gallery">
@@ -157,7 +114,10 @@ function App() {
                     rel="noopener noreferrer"
                     className="gallery-item"
                   >
-                    <img src={project.image} alt={project.title} />
+                    <img
+                      src={require(`${project.image}`)}
+                      alt={project.title}
+                    />
                     <div className="p-2">
                       <h3 className="font-bold">{project.title}</h3>
                       <p className="text-sm">{project.description}</p>
@@ -165,6 +125,11 @@ function App() {
                   </a>
                 ))}
               </div>
+            </section>
+
+            {/* Contact */}
+            <section className="contact-section" id="contact">
+              <ContactCard />
             </section>
           </main>
         </motion.div>
