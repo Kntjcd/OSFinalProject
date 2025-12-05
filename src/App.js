@@ -128,7 +128,9 @@ function App() {
             <p>BSIT 3B Student • Photojournalist • Graphic Artist</p>
             <p>Cordova, Cebu City, Philippines</p>
             <a href={resumePDF} target="_blank" rel="noopener noreferrer">
-              <button>Download Resume</button>
+              <button className="bg-green-600 text-white px-4 py-2 rounded">
+                Download Resume
+              </button>
             </a>
           </aside>
 
@@ -136,13 +138,13 @@ function App() {
           <main className="main-content">
             {/* FCFS Component */}
             <section className="fcfs-section">
-              <h2>FCFS CPU Scheduling Algorithm</h2>
+              <h1>FCFS CPU Scheduling Algorithm</h1>
               <FcfsComponent />
             </section>
 
             {/* Projects Gallery */}
             <section className="projects-section">
-              <h2>Projects Gallery</h2>
+              <h1>Projects Gallery</h1>
               <div className="gallery">
                 {projects.map((project) => (
                   <a
