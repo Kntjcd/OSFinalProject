@@ -37,7 +37,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  background: var(--card);
+  background: #2222;
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
@@ -48,7 +48,7 @@ body {
   font-family: "Orbitron", sans-serif;
   font-weight: 900;
   font-size: 28px;
-  color: var(--button-bg);
+  color: white;
 }
 
 .nav {
@@ -107,6 +107,8 @@ body {
 /* PROFILE CARD */
 .profile {
   text-align: center;
+  display: flex;
+  align-items: center;
   position: sticky;
   top: 20px;
   align-self: flex-start;
@@ -212,7 +214,7 @@ input, textarea {
 
 /* FOOTER */
 .footer {
-  background: var(--card);
+  background: #2222;
   color: var(--text);
   text-align: center;
   padding: 20px 0;
